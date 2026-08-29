@@ -1,0 +1,1115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="HireSphere — end-to-end recruitment platform from job description to hire, with AI-assisted ranking, structured interviews, and responsible governance." />
+  <title>HireSphere — Recruitment Platform Overview</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800;1,9..40,400&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --accent: #00AAE7;
+      --accent-hover: #2368A0;
+      --accent-tint: rgba(0, 170, 231, 0.08);
+      --bg: #F0F2F5;
+      --surface: #FFFFFF;
+      --elevated: #E8EAEE;
+      --border: #DDE0E6;
+      --text: #232527;
+      --text-secondary: #8C8C8C;
+      --text-muted: #B7B2B3;
+      --success: #22C55E;
+      --warning: #F59E0B;
+      --info: #3B82F6;
+      --error: #EF4048;
+      --sidebar-navy: #0F1729;
+      --radius: 8px;
+      --radius-lg: 12px;
+      --shadow: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.05);
+      --shadow-raised: 0 4px 16px rgba(0,0,0,0.12);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: "DM Sans", system-ui, sans-serif;
+      font-size: 15px;
+      line-height: 1.7;
+      color: var(--text);
+      background: var(--bg);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .site-header {
+      background: var(--sidebar-navy);
+      color: #FAFAFA;
+      padding: 0 24px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: var(--shadow-raised);
+    }
+
+    .site-header-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .wordmark {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .wordmark-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, var(--accent) 0%, var(--accent-hover) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 18px;
+      color: white;
+      flex-shrink: 0;
+    }
+
+    .wordmark-text {
+      font-weight: 700;
+      font-size: 18px;
+      letter-spacing: -0.02em;
+    }
+
+    .header-nav {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .header-nav a {
+      color: rgba(255,255,255,0.75);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 500;
+      padding: 6px 12px;
+      border-radius: 6px;
+      transition: color 0.2s, background 0.2s;
+    }
+
+    .header-nav a:hover {
+      color: white;
+      background: rgba(255,255,255,0.08);
+    }
+
+    .hero {
+      background: linear-gradient(160deg, var(--sidebar-navy) 0%, #1a2d4a 50%, #0d2137 100%);
+      color: #FAFAFA;
+      padding: 80px 24px 96px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 80% 60% at 50% 100%, rgba(0,170,231,0.18) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      max-width: 760px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background: rgba(0,170,231,0.15);
+      border: 1px solid rgba(0,170,231,0.35);
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 4px 14px;
+      border-radius: 999px;
+      margin-bottom: 24px;
+    }
+
+    .hero h1 {
+      font-size: clamp(32px, 5vw, 48px);
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -0.03em;
+      margin-bottom: 20px;
+    }
+
+    .hero h1 span { color: var(--accent); }
+
+    .hero p {
+      font-size: 18px;
+      color: rgba(255,255,255,0.72);
+      max-width: 600px;
+      margin: 0 auto 36px;
+      line-height: 1.65;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 28px;
+      border-radius: var(--radius);
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.15s;
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: white;
+    }
+
+    .btn-primary:hover { background: var(--accent-hover); transform: translateY(-1px); }
+
+    .btn-outline {
+      background: transparent;
+      color: white;
+      border: 1px solid rgba(255,255,255,0.3);
+    }
+
+    .btn-outline:hover { background: rgba(255,255,255,0.08); }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    section { padding: 72px 0; }
+
+    .section-label {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+
+    .section-title {
+      font-size: clamp(24px, 3vw, 32px);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.25;
+      margin-bottom: 16px;
+      color: var(--text);
+    }
+
+    .section-lead {
+      font-size: 16px;
+      color: var(--text-secondary);
+      max-width: 640px;
+      margin-bottom: 40px;
+      line-height: 1.65;
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    @media (max-width: 700px) {
+      .two-col { grid-template-columns: 1fr; }
+      .header-nav { display: none; }
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      box-shadow: var(--shadow);
+    }
+
+    .card h3 {
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .card-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+
+    .card-icon.red { background: #FFF0F0; }
+    .card-icon.blue { background: var(--accent-tint); }
+
+    .card ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .card ul li {
+      font-size: 14px;
+      color: var(--text-secondary);
+      padding-left: 20px;
+      position: relative;
+    }
+
+    .card ul li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 9px;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--border);
+    }
+
+    .card.problem ul li::before { background: var(--error); opacity: 0.6; }
+    .card.solution ul li::before { background: var(--accent); }
+
+    .stats-bar {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 40px 24px;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      max-width: 1100px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    @media (max-width: 700px) {
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    .stat-value {
+      font-size: 32px;
+      font-weight: 800;
+      color: var(--accent);
+      letter-spacing: -0.03em;
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    .stat-label {
+      font-size: 13px;
+      color: var(--text-secondary);
+      font-weight: 500;
+    }
+
+    .pipeline {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0;
+      align-items: stretch;
+      margin-top: 8px;
+    }
+
+    .pipeline-step {
+      flex: 1 1 120px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 16px 14px;
+      text-align: center;
+    }
+
+    .pipeline-step:first-child { border-radius: var(--radius-lg) 0 0 var(--radius-lg); }
+    .pipeline-step:last-child { border-radius: 0 var(--radius-lg) var(--radius-lg) 0; }
+
+    .pipeline-step .step-num {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 4px;
+    }
+
+    .pipeline-step .step-name {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text);
+      line-height: 1.3;
+    }
+
+    @media (max-width: 600px) {
+      .pipeline { flex-direction: column; }
+      .pipeline-step { border-radius: var(--radius) !important; }
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    @media (max-width: 900px) { .feature-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 560px) { .feature-grid { grid-template-columns: 1fr; } }
+
+    .feature-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      box-shadow: var(--shadow);
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+
+    .feature-card:hover {
+      box-shadow: var(--shadow-raised);
+      transform: translateY(-2px);
+    }
+
+    .feature-card .fc-icon {
+      font-size: 24px;
+      margin-bottom: 12px;
+    }
+
+    .feature-card h4 {
+      font-size: 15px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: var(--text);
+    }
+
+    .feature-card p {
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    .feature-card .tag {
+      display: inline-block;
+      margin-top: 12px;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: var(--accent-tint);
+      color: var(--accent-hover);
+    }
+
+    .persona-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    @media (max-width: 700px) { .persona-grid { grid-template-columns: 1fr; } }
+
+    .persona-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      border-top: 3px solid var(--accent);
+    }
+
+    .persona-card h4 {
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .persona-card .role {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 14px;
+    }
+
+    .persona-card ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .persona-card ul li {
+      font-size: 13px;
+      color: var(--text-secondary);
+      padding-left: 16px;
+      position: relative;
+    }
+
+    .persona-card ul li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: var(--success);
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .ai-section {
+      background: linear-gradient(135deg, #091E2E 0%, #0F1729 100%);
+      color: #FAFAFA;
+      padding: 72px 0;
+    }
+
+    .ai-section .section-title { color: #FAFAFA; }
+    .ai-section .section-lead { color: rgba(255,255,255,0.65); }
+
+    .ai-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    @media (max-width: 600px) { .ai-grid { grid-template-columns: 1fr; } }
+
+    .ai-item {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: var(--radius-lg);
+      padding: 20px 24px;
+    }
+
+    .ai-item h4 {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 6px;
+    }
+
+    .ai-item p {
+      font-size: 13px;
+      color: rgba(255,255,255,0.65);
+      line-height: 1.6;
+    }
+
+    .governance-note {
+      margin-top: 32px;
+      padding: 20px 24px;
+      background: rgba(0,170,231,0.1);
+      border: 1px solid rgba(0,170,231,0.25);
+      border-radius: var(--radius-lg);
+      font-size: 14px;
+      color: rgba(255,255,255,0.8);
+      line-height: 1.65;
+    }
+
+    .governance-note strong { color: var(--accent); }
+
+    .security-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    @media (max-width: 600px) { .security-grid { grid-template-columns: 1fr; } }
+
+    .security-item {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 18px 20px;
+    }
+
+    .security-item .si-icon {
+      font-size: 20px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .security-item h4 {
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .security-item p {
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.55;
+    }
+
+    .platform-strip {
+      background: var(--elevated);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 48px 24px;
+    }
+
+    .platform-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+
+    .platform-text { flex: 1; min-width: 260px; }
+    .platform-text h3 { font-size: 20px; font-weight: 700; margin-bottom: 10px; }
+    .platform-text p { font-size: 14px; color: var(--text-secondary); line-height: 1.65; }
+
+    .platform-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .platform-badge {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 8px 16px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .cta-section {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      padding: 72px 24px;
+      text-align: center;
+    }
+
+    .cta-section h2 {
+      font-size: 28px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 12px;
+    }
+
+    .cta-section p {
+      font-size: 16px;
+      color: var(--text-secondary);
+      margin-bottom: 32px;
+      max-width: 480px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .contact-placeholder {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--accent-tint);
+      border: 1px dashed var(--accent);
+      border-radius: var(--radius);
+      padding: 14px 28px;
+      font-size: 14px;
+      color: var(--accent-hover);
+      font-weight: 500;
+    }
+
+    .site-footer {
+      background: var(--sidebar-navy);
+      color: rgba(255,255,255,0.5);
+      text-align: center;
+      padding: 24px;
+      font-size: 12px;
+    }
+
+    .site-footer strong { color: rgba(255,255,255,0.8); }
+
+    @media print {
+      .site-header { position: static; }
+      .header-nav, .hero-cta { display: none; }
+      .hero { padding: 40px 24px; }
+      .feature-card:hover { transform: none; box-shadow: var(--shadow); }
+      section { padding: 40px 0; }
+      .ai-section { background: #0F1729; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a class="wordmark" href="#top">
+        <div class="wordmark-icon">H</div>
+        <span class="wordmark-text">HireSphere</span>
+      </a>
+      <nav class="header-nav" aria-label="Page sections">
+        <a href="#overview">Overview</a>
+        <a href="#workflow">Workflow</a>
+        <a href="#features">Features</a>
+        <a href="#ai">AI</a>
+        <a href="#security">Security</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero" id="top">
+    <div class="hero-inner">
+      <div class="hero-badge">Recruitment Platform</div>
+      <h1>One workspace from <span>job description</span> to hire</h1>
+      <p>
+        HireSphere gives recruiters and hiring managers a single, governed platform to draft roles,
+        source candidates, run structured interviews, and close offers with AI that accelerates
+        decisions without replacing human judgment.
+      </p>
+      <div class="hero-cta">
+        <a class="btn btn-primary" href="#features">Explore capabilities</a>
+        <a class="btn btn-outline" href="#workflow">See the workflow</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="stats-bar">
+    <div class="stats-grid">
+      <div>
+        <div class="stat-value">19</div>
+        <div class="stat-label">Integrated capabilities</div>
+      </div>
+      <div>
+        <div class="stat-value">1</div>
+        <div class="stat-label">Unified workspace</div>
+      </div>
+      <div>
+        <div class="stat-value">End-to-end</div>
+        <div class="stat-label">JD → Offer → Onboard</div>
+      </div>
+      <div>
+        <div class="stat-value">AI + Human</div>
+        <div class="stat-label">Governed collaboration</div>
+      </div>
+    </div>
+  </div>
+
+  <section id="overview">
+    <div class="container">
+      <div class="section-label">The challenge</div>
+      <h2 class="section-title">Recruiting shouldn't live in spreadsheets and email threads</h2>
+      <p class="section-lead">
+        Most hiring teams juggle disconnected tools like job boards, shared drives, interview notes in
+        docs, and offer tracking in spreadsheets. Context gets lost, decisions lack audit trails,
+        and good candidates slip through the cracks.
+      </p>
+
+      <div class="two-col">
+        <div class="card problem">
+          <h3>
+            <span class="card-icon red">⚠️</span>
+            Common pain points
+          </h3>
+          <ul>
+            <li>Job descriptions drafted from scratch every time, with no approval workflow</li>
+            <li>Resumes scattered across inboxes with no deduplication or version history</li>
+            <li>Interview feedback trapped in unstructured notes, hard to compare candidates</li>
+            <li>No visibility into pipeline health, time-to-fill, or audit history</li>
+            <li>AI tools used ad hoc with no governance, versioning, or feedback loop</li>
+            <li>Past candidates forgotten when a similar role opens again</li>
+          </ul>
+        </div>
+        <div class="card solution">
+          <h3>
+            <span class="card-icon blue">✦</span>
+            How HireSphere helps
+          </h3>
+          <ul>
+            <li>AI-assisted JD drafting with human review and approval gates</li>
+            <li>Secure resume intake with scanning, parsing, and a canonical candidate database</li>
+            <li>Structured interview notes and scorecards that feed AI-assisted summaries</li>
+            <li>Dashboards, reports, and a full audit trail for compliance and ops visibility</li>
+            <li>Responsible AI governance — versioned prompts, model tracking, user feedback</li>
+            <li>Candidate resurfacing to rediscover talent already in your pipeline</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="personas" style="background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 72px 0;">
+    <div class="container">
+      <div class="section-label">Built for your team</div>
+      <h2 class="section-title">Every role in the hiring process, covered</h2>
+      <p class="section-lead">Role-based access ensures each person sees exactly what they need nothing more, nothing less.</p>
+
+      <div class="persona-grid">
+        <div class="persona-card">
+          <div class="role">Recruiters</div>
+          <h4>Source, rank, and move candidates forward</h4>
+          <ul>
+            <li>Create and manage job postings</li>
+            <li>Upload and track resumes through a secure pipeline</li>
+            <li>AI-powered candidate ranking and fitment summaries</li>
+            <li>Shortlist with mandatory reason capture</li>
+            <li>Schedule interviews and manage the task queue</li>
+            <li>Track offers and onboarding progress</li>
+          </ul>
+        </div>
+        <div class="persona-card">
+          <div class="role">Hiring Managers</div>
+          <h4>Approve, evaluate, and decide with confidence</h4>
+          <ul>
+            <li>Review and approve job descriptions before posting</li>
+            <li>See AI-generated fitment and gap analyses per candidate</li>
+            <li>Review structured scorecards with AI-assisted drafts</li>
+            <li>Select up to 5 priority candidates for finite vacancies</li>
+            <li>Dashboard of pending approvals and pipeline health</li>
+          </ul>
+        </div>
+        <div class="persona-card">
+          <div class="role">Admins &amp; Compliance</div>
+          <h4>Govern access, AI, and auditability</h4>
+          <ul>
+            <li>Manage users, roles, and fine-grained permissions</li>
+            <li>Control page-level and action-level access matrix</li>
+            <li>Searchable audit log of every system action</li>
+            <li>AI prompt registry with version control and activation</li>
+            <li>Export reports with role-based PII redaction</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="workflow">
+    <div class="container">
+      <div class="section-label">End-to-end workflow</div>
+      <h2 class="section-title">A governed pipeline from first draft to signed offer</h2>
+      <p class="section-lead">
+        Every candidate moves through a defined stage machine. Transitions are guarded — for example,
+        shortlisting requires a reason, scorecards require a completed interview, and finite postings
+        cap priority selections at five.
+      </p>
+
+      <div class="pipeline" role="list" aria-label="Recruitment pipeline stages">
+        <div class="pipeline-step" role="listitem">
+          <div class="step-num">01</div>
+          <div class="step-name">Job Description</div>
+        </div>
+        <div class="pipeline-step" role="listitem">
+          <div class="step-num">02</div>
+          <div class="step-name">Posting Open</div>
+        </div>
+        <div class="pipeline-step" role="listitem">
+          <div class="step-num">03</div>
+          <div class="step-name">Applied</div>
+        </div>
+        <div class="pipeline-step" role="listitem">
+          <div class="step-num">04</div>
+          <div class="step-name">Shortlisted</div>
+        </div>
+        <div class="pipeline-step" role="listitem">
+          <div class="step-num">05</div>
+          <div class="step-name">Interviewed</div>
+        </div>
+        <div class="pipeline-step" role="listitem">
+          <div class="step-num">06</div>
+          <div class="step-name">Scorecard</div>
+        </div>
+        <div class="pipeline-step" role="listitem">
+          <div class="step-num">07</div>
+          <div class="step-name">Priority Pick</div>
+        </div>
+        <div class="pipeline-step" role="listitem">
+          <div class="step-num">08</div>
+          <div class="step-name">Offered</div>
+        </div>
+        <div class="pipeline-step" role="listitem">
+          <div class="step-num">09</div>
+          <div class="step-name">Hired</div>
+        </div>
+      </div>
+
+      <p style="margin-top: 24px; font-size: 13px; color: var(--text-secondary);">
+        Finite postings auto-close when all vacancies are filled. Unlimited (evergreen) postings stay
+        open until manually closed. Rejected and withdrawn candidates are tracked with full history.
+      </p>
+    </div>
+  </section>
+
+  <section id="features" style="background: var(--surface); border-top: 1px solid var(--border);">
+    <div class="container">
+      <div class="section-label">Platform capabilities</div>
+      <h2 class="section-title">Everything you need, in one place</h2>
+      <p class="section-lead">Nineteen integrated capabilities organized around how hiring teams actually work.</p>
+
+      <div class="feature-grid">
+        <div class="feature-card">
+          <div class="fc-icon">📝</div>
+          <h4>Job Description Workspace</h4>
+          <p>AI-assisted drafting with structured sections, version history, and an approval workflow before anything goes live.</p>
+          <span class="tag">AI-assisted</span>
+        </div>
+        <div class="feature-card">
+          <div class="fc-icon">📋</div>
+          <h4>Job Posting Management</h4>
+          <p>Create postings from approved JDs. Support finite vacancies (e.g. 3 of 5 filled) or unlimited evergreen roles.</p>
+          <span class="tag">Vacancy tracking</span>
+        </div>
+        <div class="feature-card">
+          <div class="fc-icon">📄</div>
+          <h4>Resume Upload Pipeline</h4>
+          <p>Secure PDF intake with malware scanning, text extraction, OCR for scanned documents, and async processing status.</p>
+          <span class="tag">Secure ingest</span>
+        </div>
+        <div class="feature-card">
+          <div class="fc-icon">👤</div>
+          <h4>Candidate Database</h4>
+          <p>Canonical candidate records with deduplication, resume version history, posting links, and a full activity timeline.</p>
+          <span class="tag">Dedup &amp; history</span>
+        </div>
+        <div class="feature-card">
+          <div class="fc-icon">🎯</div>
+          <h4>AI Candidate Ranking</h4>
+          <p>Batch rank all applicants against a JD. Get fitment summaries, gap analyses, and tailored interview questions per candidate.</p>
+          <span class="tag">AI-powered</span>
+        </div>
+        <div class="feature-card">
+          <div class="fc-icon">🔄</div>
+          <h4>Candidate Resurfacing</h4>
+          <p>Surface existing candidates who match a new posting. Priority lane for previously selected candidates not yet offered.</p>
+          <span class="tag">Talent rediscovery</span>
+        </div>
+        <div class="feature-card">
+          <div class="fc-icon">⭐</div>
+          <h4>Shortlisting Workflow</h4>
+          <p>Move candidates forward with mandatory reason capture — every shortlist decision is documented and auditable.</p>
+          <span class="tag">Accountability</span>
+        </div>
+        <div class="feature-card">
+          <div class="fc-icon">📅</div>
+          <h4>Interview Scheduling</h4>
+          <p>Task-based scheduling with assignees, due dates, and status tracking. Overdue and unscheduled views for recruiters.</p>
+          <span class="tag">Task workflow</span>
+        </div>
+        <div class="feature-card">
+          <div class="fc-icon">💬</div>
+          <h4>Interview Console</h4>
+          <p>Multi-round structured notes with version history. Notes are stored in an AI-readable format for downstream scorecards.</p>
+          <span class="tag">Structured notes</span>
+        </div>
+        <div class="feature-card">
+          <div class="fc-icon">📊</div>
+          <h4>Scorecard Center</h4>
+          <p>Competency-based scorecards available only after a completed interview — ensuring evaluations are evidence-based.</p>
+          <span class="tag">Evidence-gated</span>
+        </div>
+        <div class="feature-card">
+          <div class="fc-icon">🤖</div>
+          <h4>AI-Assisted Scorecards</h4>
+          <p>AI generates scorecard drafts from interview notes. Humans review, edit, and approve before anything is finalized.</p>
+          <span class="tag">Human-in-the-loop</span>
+        </div>
+        <div class="feature-card">
+          <div class="fc-icon">🏆</div>
+          <h4>Priority Selection</h4>
+          <p>For finite vacancies, select and rank up to 5 top candidates. Drag-and-drop ordering with enforced limits.</p>
+          <span class="tag">Top 5 picks</span>
+        </div>
+        <div class="feature-card">
+          <div class="fc-icon">🤝</div>
+          <h4>Offers &amp; Onboarding</h4>
+          <p>Track offer lifecycle from draft to accepted. Configurable onboarding checklists and external employee ID capture.</p>
+          <span class="tag">Close the loop</span>
+        </div>
+        <div class="feature-card">
+          <div class="fc-icon">🔒</div>
+          <h4>Posting Closure Rules</h4>
+          <p>Finite postings auto-close when filled. Lifecycle events logged for every status change with full history.</p>
+          <span class="tag">Auto-close</span>
+        </div>
+        <div class="feature-card">
+          <div class="fc-icon">📈</div>
+          <h4>Dashboards &amp; Reports</h4>
+          <p>Role-specific dashboards, pipeline funnels, time-to-fill metrics, and async CSV/PDF exports.</p>
+          <span class="tag">Ops visibility</span>
+        </div>
+        <div class="feature-card">
+          <div class="fc-icon">🔍</div>
+          <h4>Audit &amp; Compliance</h4>
+          <p>Searchable audit log of every action. AI run logs with model version, token usage, and linked entities.</p>
+          <span class="tag">Full traceability</span>
+        </div>
+        <div class="feature-card">
+          <div class="fc-icon">🛡️</div>
+          <h4>Role-Based Access Control</h4>
+          <p>Granular permissions per page and action. Default roles for recruiters, hiring managers, interviewers, and admins.</p>
+          <span class="tag">RBAC</span>
+        </div>
+        <div class="feature-card">
+          <div class="fc-icon">⚙️</div>
+          <h4>User Activation &amp; Access</h4>
+          <p>Admin-controlled user lifecycle — pending, active, suspended, deactivated. Only activated users can access the platform.</p>
+          <span class="tag">Access control</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="ai-section" id="ai">
+    <div class="container">
+      <div class="section-label" style="color: var(--accent);">Responsible AI</div>
+      <h2 class="section-title">AI that accelerates but never replaces human judgment</h2>
+      <p class="section-lead">
+        Every AI feature follows the same governed pattern: versioned prompts, pinned model versions,
+        logged runs, and a human feedback loop. AI outputs are always drafts for review, never final decisions.
+      </p>
+
+      <div class="ai-grid">
+        <div class="ai-item">
+          <h4>Job Description Drafting</h4>
+          <p>Generate structured JD sections from a title and bullet points. Recruiters edit, submit for review, and hiring managers approve before posting.</p>
+        </div>
+        <div class="ai-item">
+          <h4>Candidate Ranking &amp; Fitment</h4>
+          <p>Batch-rank applicants against the approved JD. Per-candidate fitment summaries, gap analyses, and suggested interview questions.</p>
+        </div>
+        <div class="ai-item">
+          <h4>Interview Question Generation</h4>
+          <p>Tailored questions based on the JD, resume, and identified skill gaps giving interviewers a focused starting point.</p>
+        </div>
+        <div class="ai-item">
+          <h4>AI-Assisted Scorecards</h4>
+          <p>Draft scorecards from structured interview notes. Interviewers and hiring managers review, edit, and approve before finalization.</p>
+        </div>
+      </div>
+
+      <div class="governance-note">
+        <strong>Responsible AI governance built in:</strong> All prompts are versioned and admin-controlled.
+        Only one active version per prompt at a time. Every AI invocation is logged with model version,
+        token usage, and cost estimate. Users can provide thumbs-up/down feedback on any AI output.
+        Retired prompts are preserved for audit — nothing is silently overwritten.
+      </div>
+    </div>
+  </section>
+
+  <div class="platform-strip">
+    <div class="platform-inner">
+      <div class="platform-text">
+        <h3>Hosted on Google Cloud Platform</h3>
+        <p>
+          HireSphere runs on Google Cloud for reliability, autoscaling, and security.
+          Deployed across dev, staging, and production environments with infrastructure-as-code,
+          automated CI/CD, and managed database high availability in production.
+        </p>
+      </div>
+      <div class="platform-badges">
+        <span class="platform-badge">Google Cloud Run</span>
+        <span class="platform-badge">Cloud SQL PostgreSQL</span>
+        <span class="platform-badge">Vertex AI (Gemini)</span>
+        <span class="platform-badge">Cloud Storage</span>
+        <span class="platform-badge">Terraform IaC</span>
+        <span class="platform-badge">Cloud CDN</span>
+      </div>
+    </div>
+  </div>
+
+  <section id="security">
+    <div class="container">
+      <div class="section-label">Security &amp; trust</div>
+      <h2 class="section-title">Built with security at every layer</h2>
+      <p class="section-lead">Your candidate data and hiring decisions are protected by design — not bolted on after the fact.</p>
+
+      <div class="security-grid">
+        <div class="security-item">
+          <span class="si-icon">🔐</span>
+          <div>
+            <h4>Authentication &amp; access control</h4>
+            <p>Secure login with bcrypt password hashing, short-lived tokens, and role-based permissions enforced on every API call.</p>
+          </div>
+        </div>
+        <div class="security-item">
+          <span class="si-icon">📁</span>
+          <div>
+            <h4>Secure resume storage</h4>
+            <p>Resumes stored in private cloud storage. Downloads via short-lived signed URLs. Infected files deleted immediately after detection.</p>
+          </div>
+        </div>
+        <div class="security-item">
+          <span class="si-icon">🛡️</span>
+          <div>
+            <h4>Malware scanning</h4>
+            <p>Every uploaded PDF is scanned for malware before parsing or storage. Failed scans are audited and the file is rejected.</p>
+          </div>
+        </div>
+        <div class="security-item">
+          <span class="si-icon">📋</span>
+          <div>
+            <h4>Full audit trail</h4>
+            <p>Every user action logged with actor, resource, before/after state, IP, and timestamp. Configurable retention (default 2 years).</p>
+          </div>
+        </div>
+        <div class="security-item">
+          <span class="si-icon">🔒</span>
+          <div>
+            <h4>Database security</h4>
+            <p>Private IP only, SSL required, no public database endpoint. Secrets managed via cloud secret manager — never in code.</p>
+          </div>
+        </div>
+        <div class="security-item">
+          <span class="si-icon">👁️</span>
+          <div>
+            <h4>PII protection</h4>
+            <p>Role-based export redaction ensures sensitive candidate data is only visible to authorized roles. Rate limiting on login in production.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-section" id="contact">
+    <h2>Want to see HireSphere in action?</h2>
+    <p>Bring job descriptions, candidates, interviews, and offers into one governed workspace.</p>
+    <div class="contact-placeholder">
+      ✉️ &nbsp; Add your contact email or scheduling link here
+    </div>
+    <p style="margin-top: 20px; font-size: 12px; color: var(--text-muted);">
+      This document was generated from the HireSphere project specification.
+      Replace the contact placeholder above before sharing with customers.
+    </p>
+  </section>
+
+  <footer class="site-footer">
+    <strong>HireSphere</strong> End-to-end recruitment platform
+  </footer>
+
+</body>
+</html>
