@@ -1,0 +1,69 @@
+---
+description: Git branches, conventional commits, lowercase — HireSphere workflow.
+alwaysApply: true
+---
+
+# Git conventions (locked)
+
+Canonical sources: `docs/feature-branches.md`, `docs/implementation-playbook.md`.
+
+## Branch naming
+
+- **All lowercase**, hyphen-separated slugs.
+- Prefixes: `infra/` (platform) or `feat/` (product).
+- One feature per branch — no bundling unrelated work.
+
+```
+infra/gcp-terraform
+infra/monorepo-scaffold
+feat/auth-rest-login
+feat/candidate-database
+```
+
+**Do not use:** `feature/`, `bugfix/`, camelCase, underscores, uppercase.
+
+## Commit messages
+
+**Format:** `<type>: <subject>`
+
+- **Subject: maximum 6 words**, all lowercase, no trailing period.
+- **Type:** lowercase conventional prefix.
+
+| Type | When |
+|---|---|
+| `feat` | New product behavior |
+| `fix` | Bug fix |
+| `docs` | Documentation only |
+| `chore` | Tooling, deps, misc |
+| `refactor` | Code change, no behavior change |
+| `test` | Tests only |
+| `build` | Docker, CI, Terraform |
+
+### Good
+
+```
+feat: add jwt login handler
+fix: block suspended user access
+docs: update schema migration guide
+chore: add cloud sql terraform module
+```
+
+### Bad
+
+```
+Added JWT login handler for users
+feat: Add JWT Login Handler
+feat: implement comprehensive authentication system with refresh tokens
+FEAT: add login
+```
+
+## Workflow
+
+1. Branch from updated `main`.
+2. Implement one playbook step per branch.
+3. Run acceptance checks before PR.
+4. Follow merge order in `docs/implementation-playbook.md`.
+
+## PR titles
+
+Same rules as commits: `<type>: <subject>` — max 6 words, lowercase.

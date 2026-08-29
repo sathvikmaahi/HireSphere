@@ -1,0 +1,41 @@
+---
+description: Locked HireSphere tech stack — do not substitute frameworks, clouds, or libraries.
+alwaysApply: true
+---
+
+# HireSphere tech stack (locked)
+
+Canonical source: `openspec/project.md`. **Do not deviate** unless the user explicitly approves a stack change in writing.
+
+## Allowed stack
+
+| Layer | Use | Do not use |
+|---|---|---|
+| Frontend | React 19, TypeScript, Vite, Tailwind CSS v4 | Next.js, Angular, Vue, plain CSS frameworks outside Tailwind v4 |
+| API | Node.js, **Fastify**, REST `/api/v1` | Express, Python/FastAPI, Django, Go, serverless frameworks outside Cloud Run |
+| Workers | Cloud Run + **Pub/Sub** | SQS, RabbitMQ, Celery, cron-only without Pub/Sub |
+| Database | **Cloud SQL PostgreSQL 15**, **Drizzle ORM** | MySQL, MongoDB, Prisma, TypeORM, Supabase as primary DB |
+| Storage | **GCS**, signed URLs | S3, local disk in prod, public buckets |
+| AI | **Vertex AI (Gemini)** via `packages/ai-prompts` | OpenAI direct, Anthropic direct, unversioned inline prompts |
+| OCR | **Document AI** | Tesseract-only for production path |
+| Auth | **JWT** (access + refresh), **bcrypt** | Hubble SSO, OAuth/SSO, session cookies without spec approval |
+| IaC | **Terraform** in `infra/terraform/` | Pulumi, CDK, click-ops-only infra |
+| CI/CD | **Cloud Build** | GitHub Actions as primary deploy (unless user adds later) |
+| Monorepo | **pnpm** workspaces: `apps/web`, `apps/api`, `services/worker`, `packages/*` | npm/yarn without approval, single-package repo layout |
+
+## Architecture rules
+
+- Business logic lives in API/worker — **not** in React beyond presentation.
+- Use platform adapters in `packages/shared` (`StorageProvider`, `JobQueue`, `AIProvider`).
+- RBAC on every protected endpoint; never trust UI-only hiding.
+- Migrations are additive only — never edit shipped migration files.
+
+## Scope exclusions (never add without explicit approval)
+
+- Hubble SSO / Hubble login
+- Miracle branding or assets
+- Feature flags product (v1 uses RBAC permissions instead)
+
+## Before proposing alternatives
+
+Ask: *"Does this need a stack change, or can the approved stack do it?"* Default answer: use the approved stack.
