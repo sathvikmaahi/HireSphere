@@ -1,0 +1,43 @@
+---
+description: UI, architecture, and OpenSpec alignment — no ad-hoc design or APIs.
+alwaysApply: true
+---
+
+# Design and specification guardrails
+
+## UI and layout (locked)
+
+Before building or changing UI, read and follow:
+
+- `design-spec.md` — colors (light/dark pairs), typography, components, elevation
+- `layout-spec.md` — app shell, sidebar, page templates, breakpoints, spacing
+
+**Rules:**
+
+- Use HireSphere design tokens — not Miracle branding or one-off palettes.
+- Sidebar stays fixed navy; only main content toggles light/dark theme.
+- Page patterns: browsable grid, detail split (280px rail), full-bleed only when specified.
+- Fonts: Plus Jakarta Sans (UI), JetBrains Mono (code) per design spec.
+
+## API and data (locked)
+
+- Base path: `/api/v1`
+- Validation: Zod schemas in `packages/shared`
+- Schema changes: update `docs/database-schema.md` + new Drizzle migration
+- Full endpoint list: `docs/implementation-plan.md` §5
+
+## Implementation order
+
+1. Read the OpenSpec for the branch (`openspec/specs/<name>/spec.md`).
+2. Follow `docs/implementation-playbook.md` for that step.
+3. Do not skip dependency branches or mix infra + feature in one PR.
+
+## AI features
+
+- Resolve prompts from `prompt_registry` (governed, versioned).
+- Log every run to `ai_runs` from day one.
+- AI output is draft-only — human review/approval required before finalization.
+
+## When unsure
+
+Check `openspec/project.md` and the feature spec first. Do not invent patterns that contradict existing docs.
