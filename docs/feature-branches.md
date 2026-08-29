@@ -1,6 +1,6 @@
 # HireSphere — Feature Branch Reference
 
-Quick index of all implementation branches. Full detail in [implementation-plan.md](./implementation-plan.md).
+Quick index of all implementation branches. **Step-by-step prompts:** [implementation-playbook.md](./implementation-playbook.md). Full detail in [implementation-plan.md](./implementation-plan.md).
 
 ## Infrastructure (merge first)
 
