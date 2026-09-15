@@ -2,7 +2,22 @@
 
 Phase-wise, feature-wise implementation guide for building HireSphere branch by branch. **Use this document to prompt AI assistants** — each section includes a copy-paste prompt, deliverables, and acceptance checks.
 
-**Related:** [project.md](../openspec/project.md) · [implementation-plan.md](./implementation-plan.md) · [gcp-infrastructure.md](./gcp-infrastructure.md) · [database-schema.md](./database-schema.md) · [feature-branches.md](./feature-branches.md)
+**Related:** [product-architecture.md](./product-architecture.md) · [project.md](../openspec/project.md) · [implementation-plan.md](./implementation-plan.md) · [gcp-infrastructure.md](./gcp-infrastructure.md) · [database-schema.md](./database-schema.md) · [feature-branches.md](./feature-branches.md)
+
+### Product domains (architecture map)
+
+| Domain | Playbook steps |
+|---|---|
+| Design system | 0.4 |
+| Identity & access *(custom login, not Hubble)* | 1.1–1.3 |
+| AI platform governance | 1.4 (partial) + 5.4 (full) |
+| Hiring & postings | 2.1–2.2 + 5.2 |
+| Candidate intake | 3.1–3.2 |
+| Matching & ranking | 3.3 |
+| Interview pipeline | 4.1–4.5 |
+| Decision & offers | 4.6 + 5.1–5.2 |
+| Insight & reporting | 5.3 |
+| Communications | 3.4 (+ notify in 4.2) |
 
 ---
 
@@ -31,9 +46,13 @@ git checkout -b <branch-name>
 ```
 Project: HireSphere — GCP-hosted recruitment platform.
 Stack: React 19 + Vite + Tailwind v4 (SPA → GCS/CDN), Fastify API on Cloud Run,
-Cloud Run worker + Pub/Sub, Cloud SQL PostgreSQL 15 + Drizzle, Vertex AI Gemini.
-API base: /api/v1. Auth: JWT + bcrypt. No Hubble SSO. No Miracle branding.
-Design: layout-spec.md + design-spec.md. RBAC on every protected endpoint.
+Cloud Run worker + Pub/Sub, Cloud SQL PostgreSQL 15 + Drizzle, Vertex AI Gemini,
+Vertex AI Vector Search for retrieval.
+API base: /api/v1. Auth: HireSphere JWT + bcrypt custom login — NOT Hubble SSO.
+No Miracle branding. AI is advisory-only; humans decide all hiring transitions.
+Domains: identity, AI governance, design system, hiring/postings, candidate intake,
+matching/ranking, interview pipeline, decision/offers, insight, communications.
+Design: layout-spec.md + design-spec.md. See docs/product-architecture.md.
 Monorepo: apps/web, apps/api, services/worker, packages/{db,shared,ai-prompts}.
 ```
 

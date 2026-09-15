@@ -2,7 +2,7 @@
 
 Deployment target: **Google Cloud Platform**. This document defines environments, services, networking, CI/CD, and the infrastructure feature branches that provision them.
 
-Related: [architecture.md](./architecture.md) · [implementation-plan.md](./implementation-plan.md) · [feature-branches.md](./feature-branches.md) · [../openspec/project.md](../openspec/project.md)
+Related: [architecture.md](./architecture.md) · [implementation-plan.md](./implementation-plan.md) · [feature-branches.md](./feature-branches.md) · [product-architecture.md](./product-architecture.md) · [../openspec/project.md](../openspec/project.md)
 
 ---
 

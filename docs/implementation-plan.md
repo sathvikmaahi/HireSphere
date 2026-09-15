@@ -2,12 +2,17 @@
 
 This document defines how to build HireSphere from the [layout spec](../layout-spec.md) and [design spec](../design-spec.md). It covers infrastructure, database design, feature sequencing, and branch strategy.
 
+**Product feature domains:** [product-architecture.md](./product-architecture.md) — Identity & access, AI platform governance, Design system, Hiring & postings, Candidate intake, Matching & ranking, Interview pipeline, Decision & offers, Insight & reporting, Communications.
+
 **Scope exclusions (per product direction):**
-- No Hubble SSO / Hubble login — authentication is username + password via REST API only.
+- No Hubble SSO / Hubble login — authentication is username + password via HireSphere REST API and a **custom branded login page** only.
 - No Miracle branding — use HireSphere assets and tokens from the design spec only.
 - Hubble ID is captured as an **external reference field** on offers/onboarding (feature 16), not as an auth provider.
+- Candidate-facing email is gated until product unlocks it.
 
-**Documentation branch:** All planning documents and OpenSpec specs live on `feat/docs` under `docs/` and `openspec/`.
+**Documentation branch:** All planning documents and OpenSpec specs live under `docs/` and `openspec/`.
+
+**Investor overview:** [../share/hiresphere-overview.html](../share/hiresphere-overview.html)
 
 ---
 
@@ -871,9 +876,12 @@ Upload → MIME/size check → store temp blob → malware scan
 | Document | Purpose |
 |---|---|
 | [../openspec/project.md](../openspec/project.md) | **OpenSpec** — requirements, scenarios, branch mapping |
+| [product-architecture.md](./product-architecture.md) | Ten product feature domains |
 | [feature-branches.md](./feature-branches.md) | Quick-reference branch list |
+| [implementation-playbook.md](./implementation-playbook.md) | Phase prompts |
 | [database-schema.md](./database-schema.md) | Table-level schema detail |
 | [architecture.md](./architecture.md) | System context and data-flow diagrams |
 | [gcp-infrastructure.md](./gcp-infrastructure.md) | GCP services, Terraform, CI/CD, environments |
 | [../layout-spec.md](../layout-spec.md) | UI shell and layout |
 | [../design-spec.md](../design-spec.md) | Visual design tokens |
+| [../share/hiresphere-overview.html](../share/hiresphere-overview.html) | Investor overview |
