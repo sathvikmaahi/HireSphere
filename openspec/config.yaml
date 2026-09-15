@@ -1,0 +1,109 @@
+schema: spec-driven
+
+# Project context. Shown to AI when creating artifacts.
+context: |
+  TalentSphere is a greenfield, AI-assisted recruitment platform. Its defining
+  constraint is governance: every material hiring decision rests with an
+  accountable human, and every AI contribution is logged, explainable, and
+  advisory-only. Substrate is built before features — audit before the first
+  record it must witness, AI run logging before the first provider call.
+
+  Tech stack (settled, exploration notes D09 — do not re-litigate):
+  - Backend: FastAPI on Python 3.12+, SQLAlchemy 2.0, Alembic migrations
+  - Frontend: React 18 + TypeScript, Vite, strict tsconfig
+  - Database: PostgreSQL on Cloud SQL
+  - Infrastructure: Terraform on GCP, GitLab CI/CD
+  - Observability: OpenTelemetry — structured logs, metrics, traces
+  - Background work: Pub/Sub -> Eventarc -> dispatcher -> Cloud Workflows ->
+    Cloud Run Job, consumed from the landing zone's reusable Terraform modules.
+    NOT Cloud Tasks or Celery — that row of D09 was superseded 2026-08-25
+  - Vector backend: Vertex AI Vector Search (Wave 2, not yet built)
+
+  Repository layout:
+  - backend/    FastAPI application; migrations in backend/app/migrations
+  - frontend/   React + TypeScript
+  - infra/      Terraform: modules/workload plus one root per environment
+  - scripts/    Release and operational tooling
+  - reference/  Supplied design and layout specs — authoritative for visual
+                language, silent on TalentSphere's own screens
+  - openspec/   Planning artifacts; one change per FEATURE, proposed one at a
+                time. "Wave" no longer means a macro-grouping — that is now
+                "Phase". See glossary.md before using either word.
+
+  Environments: Local, Dev, UAT, Prod. QA was dropped outright on 2026-08-21 —
+  the GCP organization has no fld-qa and no QA network host, so QA Terraform
+  would have described infrastructure with nowhere to land. Do not reintroduce
+  it. Of the four, only Local and Dev are real: the billing account allows five
+  linked projects and three are already used, so UAT and Prod exist as
+  validated Terraform that is never applied (design.md D15, as amended). Local
+  is docker-compose; its Postgres publishes on 5433 to avoid colliding with a
+  natively installed server.
+
+  Architectural rules that outlive any single wave:
+  - One permission evaluator. Every page, endpoint, and background actor —
+    including the AI Service Account — consults it. Verdict and explanation come
+    from the same evaluation pass, never reconstructed separately. Deny by
+    default; explicit denial overrides any grant. Uncached, so revocation bites
+    on the next request.
+  - Every state transition goes through the workflow service. No surface writes
+    a state field directly.
+  - Every material write produces an audit record in the same transaction. A
+    failed audit write fails the operation. Audit and AI run tables are
+    append-only: the application role holds INSERT and SELECT only.
+  - Audit records carry references and diffs, never candidate personal data.
+    Redaction is applied at write time, not as a display filter.
+  - The AI gateway is the only egress to a model provider, and the run log is
+    written before invocation — if the log cannot be written, the provider is
+    never called. The gateway has no capability to trigger a state transition.
+  - Unconfirmed external contracts sit behind adapters: Hubble login (OD-001)
+    and the AI provider (OD-003).
+  - Design tokens are the single source of truth for visual style. No component
+    defines a raw color or spacing value.
+
+  Conventions:
+  - Deployment settings vs runtime configuration are distinct. Settings are
+    env-injected and a change is a redeploy; runtime configuration lives in the
+    runtime_config table, is declared in a closed registry, and every change is
+    audited with a mandatory reason.
+  - Secrets are never committed. They are injected at runtime from Secret
+    Manager; alembic.ini and settings files deliberately carry no DSN.
+  - Errors leave the API through one global handler with a single body shape:
+    code, message, trace id, correlation id, field errors. No stack trace,
+    secret, or raw prompt content ever reaches a response.
+  - Every request carries a correlation ID, propagated into background jobs and
+    database calls, and echoed on the response.
+  - Feature flags are declared, never invented; an unknown flag raises rather
+    than resolving false. A disabled capability answers 404.
+  - Migrations must be reversible. Schema is created only by migrations, in
+    every environment including Local.
+  - Conventional commit subjects (feat/fix/docs/refactor/test/build/ci/chore);
+    scripts/release_notes.py groups the release notes from them.
+  - Python: ruff (line length 100) and mypy strict. TypeScript: ESLint with
+    typescript-eslint strictTypeChecked, and Prettier.
+  - Tests state the requirement they defend, and assert prohibitions
+    explicitly — that a secret is absent, that no record was written.
+
+# Per-artifact rules (optional)
+# Add custom rules for specific artifacts.
+rules:
+  tasks:
+    - tasks.md is the feature's complete backlog — every TS-BL-XXX item that
+      belongs to it, one section per item with a stated goal, not a flat list.
+    - Record each item's dependencies in AGENTS.md's YAML notation (id,
+      feature, depends_on, status), by ID and never by a person's name.
+    - Do NOT assign sprints or waves here. Per exploration-notes.md D.11 all
+      twelve features are proposed first, and the sprint/wave schedule is
+      redone afterwards in its own conversation against delivery/. This rule
+      previously said the opposite; it predates AGENTS.md's feature-level model.
+
+# Per-operation guidance (optional)
+# Add advisory guidance for how apply and archive work should be conducted.
+# This is separate from artifact rules above.
+# Example:
+#   operations:
+#     apply:
+#       guidance:
+#         - Keep test summaries concise
+#     archive:
+#       guidance:
+#         - Summarize the archive outcome before finishing

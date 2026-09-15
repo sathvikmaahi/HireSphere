@@ -1,22 +1,33 @@
 # HireSphere
 
-End-to-end recruitment platform: job descriptions, postings, candidate intake, AI-assisted ranking, interview workflows, scorecards, offers, and onboarding. Deployed on **Google Cloud Platform**.
+End-to-end, AI-assisted recruitment platform: identity, governed AI, design system, hiring &
+postings, candidate intake, matching & ranking, interview pipeline, decisions & offers, insight,
+and communications. Deployed on **Google Cloud Platform**.
 
-**Current status:** Planning and specification phase. This repository contains architecture docs, OpenSpec behavioral specs, UI design guides, and partial Terraform scaffolding. Application code (`apps/`, `services/`, `packages/`) will land via the infra and feature branches described below.
+**Current status:** Planning and specification phase. Application code lands via infra and feature
+branches. See [docs/product-architecture.md](docs/product-architecture.md).
 
 ---
 
 ## What it does
 
-| Area | Capabilities |
+| Domain | Capabilities |
 |---|---|
-| **Jobs** | AI-assisted JD drafting, approval workflow, finite/unlimited postings, auto-close rules |
-| **Candidates** | Secure resume upload, dedup, version history, AI ranking, resurfacing |
-| **Selection** | Shortlisting (mandatory reasons), interview scheduling, structured notes, scorecards |
-| **Close** | Priority picks (up to 5 per finite vacancy), offers, onboarding tracker |
-| **Governance** | RBAC, audit logs, responsible AI (versioned prompts, model tracking, feedback) |
+| **Identity & access** | Custom branded login (not Hubble SSO), activation, RBAC, admin cockpit |
+| **AI platform governance** | Prompt registry, AIRun logging, advisory-only AI, feedback |
+| **Design system** | Tokens, app shell, dense tables, page templates |
+| **Hiring & postings** | AI-assisted JD drafting, finite/unlimited postings, closure rules |
+| **Candidate intake** | Secure resume upload, scan, parse/OCR, dedup, versions |
+| **Matching & ranking** | Embeddings, Vector Search retrieval, fitment/gaps, ranking board |
+| **Interview pipeline** | Shortlisting, scheduling, structured notes, AI scorecards |
+| **Decision & offers** | Priority picks, offers, onboarding, posting closure |
+| **Insight & reporting** | Dashboards, aging, audit, AI agreement, exports |
+| **Communications** | Internal notifications, candidate resurfacing, priority lane |
 
-**Customer overview:** [share/hiresphere-overview.html](share/hiresphere-overview.html) — self-contained HTML you can open in a browser or share with stakeholders.
+**Investor / stakeholder overview:** [share/hiresphere-overview.html](share/hiresphere-overview.html)
+
+**Auth:** HireSphere-owned username + password (JWT + bcrypt). Hubble SSO is out of scope;
+`hubble_id` is only an optional onboarding field.
 
 ---
 
@@ -26,6 +37,7 @@ End-to-end recruitment platform: job descriptions, postings, candidate intake, A
 HireSphere/
 ├── docs/                          # Planning and implementation guides
 │   ├── implementation-playbook.md # Phase-wise build guide with copy-paste AI prompts
+│   ├── product-architecture.md    # Ten product feature domains
 │   ├── implementation-plan.md     # Sequencing, API surface, per-branch deliverables
 │   ├── feature-branches.md          # Branch index and merge order
 │   ├── architecture.md              # System context, data flows, security boundaries
@@ -33,18 +45,12 @@ HireSphere/
 │   └── gcp-infrastructure.md        # Terraform modules, GCP service map, environments
 │
 ├── openspec/                      # Behavioral specs (OpenSpec format)
-│   ├── project.md                   # Project context, tech stack, spec index
+│   ├── project.md                   # Project context, tech stack, domain → spec index
 │   ├── README.md                    # OpenSpec usage
-│   └── specs/                       # One spec per infra branch or feature
-│       ├── infrastructure/
-│       ├── monorepo-scaffold/
-│       ├── database-foundation/
-│       ├── app-shell/
-│       ├── auth/
-│       └── …                        # 19 product feature specs
+│   └── specs/                       # Infra + product feature specs
 │
 ├── share/                         # Externally shareable artifacts
-│   └── hiresphere-overview.html     # Customer-facing product overview
+│   └── hiresphere-overview.html     # Investor / stakeholder overview
 │
 ├── infra/
 │   └── terraform/
@@ -82,9 +88,11 @@ cloudbuild.yaml
 | Frontend | React 19, TypeScript, Vite, Tailwind CSS v4 |
 | API | Node.js (Fastify) on Cloud Run |
 | Workers | Cloud Run + Pub/Sub |
+| Auth | HireSphere JWT + bcrypt (custom login — not Hubble SSO) |
 | Database | Cloud SQL PostgreSQL 15, Drizzle ORM |
 | Storage | Google Cloud Storage (resumes, exports, SPA assets) |
-| AI | Vertex AI (Gemini) |
+| AI | Vertex AI (Gemini) + governed prompt registry |
+| Retrieval | Vertex AI Vector Search |
 | OCR | Document AI |
 | IaC | Terraform (`infra/terraform/`) |
 | CI/CD | Cloud Build |
@@ -180,6 +188,7 @@ Resolve before the blocking step (see [openspec/project.md](openspec/project.md)
 | Document | Purpose |
 |---|---|
 | [docs/implementation-playbook.md](docs/implementation-playbook.md) | Phase-wise implementation with copy-paste prompts |
+| [docs/product-architecture.md](docs/product-architecture.md) | Ten product feature domains |
 | [docs/implementation-plan.md](docs/implementation-plan.md) | API surface, schema overview, per-branch deliverables |
 | [docs/feature-branches.md](docs/feature-branches.md) | Branch naming and merge order |
 | [docs/architecture.md](docs/architecture.md) | System context, auth flow, pipeline state machine |
@@ -189,7 +198,7 @@ Resolve before the blocking step (see [openspec/project.md](openspec/project.md)
 | [openspec/specs/](openspec/specs/) | Behavioral requirements per feature |
 | [design-spec.md](design-spec.md) | Color, typography, components |
 | [layout-spec.md](layout-spec.md) | App shell, sidebar, grids, breakpoints |
-| [share/hiresphere-overview.html](share/hiresphere-overview.html) | Customer-facing product overview |
+| [share/hiresphere-overview.html](share/hiresphere-overview.html) | Investor / stakeholder overview |
 
 ---
 
