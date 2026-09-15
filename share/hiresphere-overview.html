@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="HireSphere — AI-assisted recruitment from job description to hire. Governed AI, owned identity, full hiring loop. Investor overview." />
-  <title>HireSphere — Investor Overview</title>
+  <meta name="description" content="HireSphere: recruitment software from job description to hire. AI assists; people decide. Confidential overview." />
+  <title>HireSphere Overview</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
@@ -12,7 +12,6 @@
     :root {
       --accent: #00AAE7;
       --accent-hover: #2368A0;
-      --accent-tint: rgba(0, 170, 231, 0.1);
       --bg: #F0F2F5;
       --surface: #FFFFFF;
       --elevated: #E8EAEE;
@@ -23,314 +22,324 @@
       --navy: #0F1729;
       --navy-mid: #1a2744;
       --radius: 10px;
-      --shadow: 0 1px 3px rgba(15, 23, 41, 0.06);
-      --shadow-lg: 0 12px 40px rgba(15, 23, 41, 0.12);
+      --shadow: 0 2px 8px rgba(15, 23, 41, 0.08);
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
+    ::selection { background: rgba(0, 170, 231, 0.25); color: var(--text); }
     body {
       font-family: "Plus Jakarta Sans", system-ui, sans-serif;
-      font-size: 16px;
-      line-height: 1.65;
+      font-size: 17px;
+      line-height: 1.6;
       color: var(--text);
       background: var(--bg);
       -webkit-font-smoothing: antialiased;
     }
+    a:focus-visible, button:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+    }
 
     .site-header {
       position: sticky; top: 0; z-index: 50;
-      background: rgba(15, 23, 41, 0.92);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(255,255,255,0.06);
+      background: var(--navy);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
     }
     .site-header-inner {
-      max-width: 1080px; margin: 0 auto; padding: 0 24px;
-      height: 64px; display: flex; align-items: center; justify-content: space-between;
+      max-width: 920px; margin: 0 auto; padding: 0 28px;
+      height: 56px; display: flex; align-items: center; justify-content: space-between;
     }
     .wordmark {
-      display: flex; align-items: center; gap: 12px;
-      text-decoration: none; color: #FAFAFA; font-weight: 700; font-size: 18px;
-      letter-spacing: -0.02em;
+      text-decoration: none; color: #FAFAFA;
+      font-weight: 700; font-size: 17px; letter-spacing: -0.02em;
     }
-    .wordmark-mark {
-      width: 36px; height: 36px; border-radius: 9px;
-      background: linear-gradient(145deg, var(--accent), var(--accent-hover));
-      display: grid; place-items: center;
-      font-weight: 800; color: #fff; font-size: 15px;
-    }
-    .header-nav { display: flex; gap: 4px; }
+    .wordmark span { color: var(--accent); }
+    .header-nav { display: flex; gap: 2px; align-items: center; }
     .header-nav a {
-      color: rgba(255,255,255,0.7); text-decoration: none;
-      font-size: 13px; font-weight: 500; padding: 8px 12px; border-radius: 6px;
+      color: rgba(255,255,255,0.65); text-decoration: none;
+      font-size: 13px; font-weight: 500; padding: 7px 11px; border-radius: 6px;
     }
-    .header-nav a:hover { color: #fff; background: rgba(255,255,255,0.08); }
+    .header-nav a:hover { color: #fff; }
     .header-cta {
       background: var(--accent); color: #fff !important;
-      font-weight: 600 !important;
+      font-weight: 600 !important; margin-left: 8px;
     }
     .header-cta:hover { background: var(--accent-hover) !important; }
 
     .hero {
-      min-height: calc(100vh - 64px);
-      display: flex; align-items: center;
       background:
-        radial-gradient(ellipse 90% 70% at 70% 20%, rgba(0,170,231,0.22), transparent 55%),
-        radial-gradient(ellipse 60% 50% at 10% 80%, rgba(35,104,160,0.18), transparent 50%),
-        linear-gradient(165deg, var(--navy) 0%, var(--navy-mid) 55%, #0d1a2e 100%);
+        linear-gradient(180deg, rgba(0,170,231,0.12) 0%, transparent 42%),
+        linear-gradient(160deg, var(--navy) 0%, var(--navy-mid) 100%);
       color: #FAFAFA;
-      padding: 72px 24px 88px;
-      position: relative;
-      overflow: hidden;
+      padding: 88px 28px 96px;
     }
-    .hero-inner { max-width: 1080px; margin: 0 auto; width: 100%; position: relative; }
+    .hero-inner { max-width: 920px; margin: 0 auto; }
     .hero-brand {
-      font-size: clamp(42px, 8vw, 72px);
+      font-size: clamp(48px, 9vw, 80px);
       font-weight: 800;
-      letter-spacing: -0.04em;
-      line-height: 1;
-      margin-bottom: 20px;
-      animation: rise 0.7s ease-out both;
+      letter-spacing: -0.045em;
+      line-height: 0.95;
+      margin-bottom: 28px;
     }
     .hero-brand span { color: var(--accent); }
     .hero h1 {
-      font-size: clamp(22px, 3.2vw, 32px);
+      font-size: clamp(22px, 3vw, 30px);
       font-weight: 600;
-      letter-spacing: -0.02em;
-      line-height: 1.3;
-      max-width: 640px;
-      margin-bottom: 16px;
-      color: rgba(255,255,255,0.95);
-      animation: rise 0.7s 0.08s ease-out both;
+      letter-spacing: -0.025em;
+      line-height: 1.35;
+      max-width: 28ch;
+      margin-bottom: 14px;
+      color: #fff;
     }
     .hero-lead {
       font-size: 17px;
-      color: rgba(255,255,255,0.68);
-      max-width: 520px;
-      margin-bottom: 36px;
-      animation: rise 0.7s 0.16s ease-out both;
+      color: rgba(255,255,255,0.62);
+      max-width: 42ch;
+      margin-bottom: 32px;
+      line-height: 1.55;
     }
-    .hero-actions {
-      display: flex; gap: 12px; flex-wrap: wrap;
-      animation: rise 0.7s 0.24s ease-out both;
-    }
-    @keyframes rise {
-      from { opacity: 0; transform: translateY(16px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
+    .hero-actions { display: flex; gap: 10px; flex-wrap: wrap; }
 
     .btn {
-      display: inline-flex; align-items: center; gap: 8px;
-      padding: 14px 26px; border-radius: var(--radius);
+      display: inline-flex; align-items: center;
+      padding: 12px 22px; border-radius: var(--radius);
       font-size: 14px; font-weight: 600; text-decoration: none;
       border: none; cursor: pointer;
-      transition: transform 0.15s, background 0.2s;
+      transition: background 0.15s, border-color 0.15s;
     }
-    .btn:hover { transform: translateY(-1px); }
     .btn-primary { background: var(--accent); color: #fff; }
     .btn-primary:hover { background: var(--accent-hover); }
     .btn-ghost {
       background: transparent; color: #fff;
-      border: 1px solid rgba(255,255,255,0.28);
+      border: 1px solid rgba(255,255,255,0.25);
     }
-    .btn-ghost:hover { background: rgba(255,255,255,0.08); }
+    .btn-ghost:hover { border-color: rgba(255,255,255,0.5); }
 
-    .container { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
-    section { padding: 80px 0; }
-    .section-label {
-      font-size: 12px; font-weight: 700; letter-spacing: 0.1em;
-      text-transform: uppercase; color: var(--accent); margin-bottom: 10px;
-    }
+    .container { max-width: 920px; margin: 0 auto; padding: 0 28px; }
+    section { padding: 72px 0; }
     .section-title {
-      font-size: clamp(26px, 3.5vw, 36px);
-      font-weight: 750; letter-spacing: -0.03em; line-height: 1.2;
-      margin-bottom: 14px;
+      font-size: clamp(24px, 3.2vw, 34px);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.2;
+      margin-bottom: 12px;
     }
     .section-lead {
-      font-size: 17px; color: var(--text-secondary);
-      max-width: 600px; margin-bottom: 40px;
+      font-size: 17px;
+      color: var(--text-secondary);
+      max-width: 54ch;
+      margin-bottom: 36px;
+      line-height: 1.55;
     }
 
-    .thesis {
+    .pull {
       background: var(--surface);
       border-bottom: 1px solid var(--border);
-      padding: 48px 24px;
+      padding: 40px 28px;
     }
-    .thesis-grid {
-      max-width: 1080px; margin: 0 auto;
-      display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px;
+    .pull p {
+      max-width: 920px; margin: 0 auto;
+      font-size: clamp(18px, 2.4vw, 22px);
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      line-height: 1.45;
+      color: var(--text);
     }
-    .thesis-item strong {
-      display: block; font-size: 15px; font-weight: 700;
-      margin-bottom: 6px; color: var(--text);
+    .pull p em {
+      font-style: normal;
+      color: var(--accent-hover);
+      font-weight: 600;
     }
-    .thesis-item p { font-size: 14px; color: var(--text-secondary); line-height: 1.55; }
 
-    .split {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 20px;
+    .problem-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      border-top: 1px solid var(--border);
     }
-    .panel {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 28px;
-      box-shadow: var(--shadow);
-    }
-    .panel h3 {
-      font-size: 15px; font-weight: 700; margin-bottom: 14px;
-      display: flex; align-items: center; gap: 10px;
-    }
-    .dot {
-      width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0;
-    }
-    .dot.bad { background: #EF4048; }
-    .dot.good { background: var(--accent); }
-    .panel ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
-    .panel li {
-      font-size: 14px; color: var(--text-secondary);
-      padding-left: 14px; border-left: 2px solid var(--border);
-    }
-    .panel.opportunity li { border-left-color: var(--accent); }
-
-    .domains {
+    .problem-list li {
+      padding: 18px 0;
+      border-bottom: 1px solid var(--border);
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 16px;
+      grid-template-columns: 140px 1fr;
+      gap: 20px;
+      align-items: start;
     }
-    .domain {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 22px 24px;
-      transition: border-color 0.2s, box-shadow 0.2s;
+    .problem-list strong {
+      font-size: 14px;
+      font-weight: 650;
+      color: var(--text);
+      padding-top: 2px;
     }
-    .domain:hover {
-      border-color: rgba(0,170,231,0.45);
-      box-shadow: var(--shadow-lg);
+    .problem-list span {
+      font-size: 15px;
+      color: var(--text-secondary);
+      line-height: 1.5;
     }
-    .domain-num {
-      font-family: "JetBrains Mono", monospace;
-      font-size: 11px; font-weight: 500; color: var(--accent);
-      margin-bottom: 8px;
-    }
-    .domain h3 { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
-    .domain p { font-size: 14px; color: var(--text-secondary); line-height: 1.55; }
 
-    .pipeline-wrap { overflow-x: auto; padding-bottom: 8px; }
-    .pipeline {
-      display: flex; gap: 0; min-width: 720px;
-      align-items: stretch;
+    .cap-intro { margin-bottom: 28px; }
+    .cap-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
     }
-    .pipe-step {
+    .cap-list li {
+      display: grid;
+      grid-template-columns: minmax(160px, 220px) 1fr;
+      gap: 16px 28px;
+      padding: 20px 0;
+      border-top: 1px solid var(--border);
+    }
+    .cap-list li:last-child { border-bottom: 1px solid var(--border); }
+    .cap-list h3 {
+      font-size: 15px;
+      font-weight: 650;
+      letter-spacing: -0.01em;
+    }
+    .cap-list p {
+      font-size: 15px;
+      color: var(--text-secondary);
+      line-height: 1.5;
+      max-width: 52ch;
+    }
+
+    .pipeline-wrap { overflow-x: auto; margin-top: 8px; }
+    .pipeline {
+      display: flex;
+      gap: 6px;
+      min-width: 640px;
+      list-style: none;
+    }
+    .pipeline li {
       flex: 1;
       background: var(--surface);
       border: 1px solid var(--border);
-      padding: 18px 14px;
+      border-radius: 8px;
+      padding: 14px 10px;
       text-align: center;
-      position: relative;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text);
     }
-    .pipe-step:first-child { border-radius: 10px 0 0 10px; }
-    .pipe-step:last-child { border-radius: 0 10px 10px 0; }
-    .pipe-step + .pipe-step { border-left: none; }
-    .pipe-step::after {
-      content: "";
-      position: absolute; right: -7px; top: 50%;
-      width: 12px; height: 12px;
-      border-top: 1px solid var(--border);
-      border-right: 1px solid var(--border);
-      background: var(--surface);
-      transform: translateY(-50%) rotate(45deg);
-      z-index: 1;
-    }
-    .pipe-step:last-child::after { display: none; }
-    .pipe-n {
-      font-family: "JetBrains Mono", monospace;
-      font-size: 11px; color: var(--accent); margin-bottom: 6px;
-    }
-    .pipe-name { font-size: 13px; font-weight: 600; }
 
-    .moat-grid {
-      display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+    .why {
+      background: var(--navy);
+      color: #FAFAFA;
+      padding: 72px 0;
     }
-    .moat-card {
-      background: var(--navy); color: #FAFAFA;
-      border-radius: 12px; padding: 28px 24px;
+    .why .section-title { color: #fff; }
+    .why .section-lead { color: rgba(255,255,255,0.6); }
+    .why-points {
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+      max-width: 60ch;
     }
-    .moat-card h3 { font-size: 16px; font-weight: 700; margin-bottom: 10px; }
-    .moat-card p { font-size: 14px; color: rgba(255,255,255,0.7); line-height: 1.55; }
-    .moat-card .tag {
-      display: inline-block; font-size: 11px; font-weight: 600;
-      letter-spacing: 0.06em; text-transform: uppercase;
-      color: var(--accent); margin-bottom: 12px;
+    .why-points h3 {
+      font-size: 17px;
+      font-weight: 650;
+      margin-bottom: 6px;
+      color: #fff;
+    }
+    .why-points p {
+      font-size: 15px;
+      color: rgba(255,255,255,0.65);
+      line-height: 1.55;
     }
 
     .stack-table {
-      width: 100%; border-collapse: collapse;
-      background: var(--surface); border-radius: 12px; overflow: hidden;
-      border: 1px solid var(--border);
-    }
-    .stack-table th, .stack-table td {
-      text-align: left; padding: 14px 18px;
-      border-bottom: 1px solid var(--border);
+      width: 100%;
+      border-collapse: collapse;
       font-size: 14px;
     }
-    .stack-table th {
-      background: var(--elevated); font-weight: 600; font-size: 12px;
-      text-transform: uppercase; letter-spacing: 0.04em; color: var(--text-muted);
+    .stack-table th, .stack-table td {
+      text-align: left;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
     }
+    .stack-table th {
+      font-weight: 600;
+      font-size: 12px;
+      color: var(--text-muted);
+      width: 28%;
+      padding-right: 16px;
+    }
+    .stack-table td { color: var(--text-secondary); }
+    .stack-table tr:last-child th,
     .stack-table tr:last-child td { border-bottom: none; }
-    .stack-table td:first-child { font-weight: 600; width: 28%; }
-    .mono { font-family: "JetBrains Mono", monospace; font-size: 12px; color: var(--accent); }
+    .mono {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 12px;
+      color: var(--accent-hover);
+    }
 
     .ask {
-      background:
-        radial-gradient(ellipse 80% 60% at 50% 0%, rgba(0,170,231,0.2), transparent 60%),
-        var(--navy);
-      color: #FAFAFA;
-      padding: 88px 24px;
-      text-align: center;
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      padding: 80px 28px;
+      text-align: left;
     }
+    .ask-inner { max-width: 920px; margin: 0 auto; }
     .ask h2 {
-      font-size: clamp(28px, 4vw, 40px);
-      font-weight: 800; letter-spacing: -0.03em;
-      margin-bottom: 16px;
+      font-size: clamp(26px, 3.5vw, 36px);
+      font-weight: 750;
+      letter-spacing: -0.03em;
+      margin-bottom: 12px;
+      max-width: 20ch;
     }
     .ask p {
-      font-size: 17px; color: rgba(255,255,255,0.7);
-      max-width: 560px; margin: 0 auto 32px;
+      font-size: 17px;
+      color: var(--text-secondary);
+      max-width: 48ch;
+      margin-bottom: 28px;
     }
-    .ask-meta {
-      display: flex; justify-content: center; gap: 32px; flex-wrap: wrap;
-      margin-top: 40px; font-size: 13px; color: rgba(255,255,255,0.55);
+    .ask .btn-ghost {
+      color: var(--text);
+      border-color: var(--border);
     }
-    .ask-meta strong { color: rgba(255,255,255,0.9); display: block; font-size: 15px; margin-bottom: 2px; }
+    .ask .btn-ghost:hover {
+      border-color: var(--text-muted);
+      background: var(--elevated);
+    }
 
     footer {
-      background: #0a1020; color: rgba(255,255,255,0.45);
-      padding: 28px 24px; font-size: 13px; text-align: center;
+      background: #0a1020;
+      color: rgba(255,255,255,0.4);
+      padding: 24px 28px;
+      font-size: 13px;
+    }
+    .footer-inner {
+      max-width: 920px; margin: 0 auto;
+      display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap;
     }
     footer a { color: var(--accent); text-decoration: none; }
 
-    @media (max-width: 800px) {
-      .header-nav { display: none; }
-      .thesis-grid, .split, .domains, .moat-grid { grid-template-columns: 1fr; }
-      .hero { min-height: auto; padding: 56px 24px 64px; }
+    @media (max-width: 720px) {
+      .header-nav a:not(.header-cta) { display: none; }
+      .hero { padding: 64px 24px 72px; }
+      .problem-list li,
+      .cap-list li {
+        grid-template-columns: 1fr;
+        gap: 6px;
+      }
+      section { padding: 56px 0; }
     }
   </style>
 </head>
 <body>
   <header class="site-header">
     <div class="site-header-inner">
-      <a class="wordmark" href="#top">
-        <span class="wordmark-mark">H</span>
-        HireSphere
-      </a>
+      <a class="wordmark" href="#top">Hire<span>Sphere</span></a>
       <nav class="header-nav" aria-label="Primary">
-        <a href="#opportunity">Opportunity</a>
+        <a href="#problem">Problem</a>
         <a href="#product">Product</a>
-        <a href="#moat">Moat</a>
-        <a href="#stack">Platform</a>
-        <a class="header-cta" href="#invest">Invest</a>
+        <a href="#why">Why us</a>
+        <a href="#stack">Stack</a>
+        <a class="header-cta" href="#contact">Talk</a>
       </nav>
     </div>
   </header>
@@ -338,171 +347,133 @@
   <section class="hero" id="top">
     <div class="hero-inner">
       <div class="hero-brand">Hire<span>Sphere</span></div>
-      <h1>The governed hiring OS from job description to offer, with AI that never decides alone.</h1>
+      <h1>Recruitment software from posting to offer, with AI that stays in its lane.</h1>
       <p class="hero-lead">
-        One workspace for recruiters and hiring managers. Own your login. Rank with evidence.
-        Audit every AI recommendation. Close roles with accountability built in.
+        One place for recruiters and hiring managers. Your login. Ranked candidates with receipts. Humans close every decision.
       </p>
       <div class="hero-actions">
-        <a class="btn btn-primary" href="#product">See the product surface</a>
-        <a class="btn btn-ghost" href="#invest">Investment thesis</a>
+        <a class="btn btn-primary" href="#product">What we built</a>
+        <a class="btn btn-ghost" href="#contact">Get in touch</a>
       </div>
     </div>
   </section>
 
-  <div class="thesis">
-    <div class="thesis-grid">
-      <div class="thesis-item">
-        <strong>Enterprise pain is structural</strong>
-        <p>Hiring still runs on email, spreadsheets, and ungoverned AI paste-ins — slow, opaque, and hard to defend.</p>
-      </div>
-      <div class="thesis-item">
-        <strong>AI without governance is liability</strong>
-        <p>HireSphere treats every model call as advisory, versioned, and logged — humans own every hiring transition.</p>
-      </div>
-      <div class="thesis-item">
-        <strong>Full loop, one platform</strong>
-        <p>Postings → intake → vector ranking → interviews → offers → insight &amp; resurfacing on GCP.</p>
-      </div>
-    </div>
+  <div class="pull">
+    <p>
+      Most teams hire across email, shared drives, and chatbot paste-ins.
+      <em>HireSphere puts the whole loop in one system,</em> and makes sure every AI suggestion is logged, versioned, and overridable.
+    </p>
   </div>
 
-  <section id="opportunity">
+  <section id="problem">
     <div class="container">
-      <div class="section-label">The opportunity</div>
-      <h2 class="section-title">Hiring software that is fast and defensible</h2>
+      <h2 class="section-title">What’s broken today</h2>
       <p class="section-lead">
-        Buyers want speed and AI leverage — and they need audit trails, role-based access,
-        and clear ownership when a decision is challenged. HireSphere is built for both.
+        Speed and compliance pull in opposite directions. Tools that add AI usually skip the audit trail. Tools that audit everything feel like 2014.
       </p>
-      <div class="split">
-        <div class="panel">
-          <h3><span class="dot bad"></span> Status quo</h3>
-          <ul>
-            <li>Fragmented tools for JD, ATS notes, calendars, and scorecards</li>
-            <li>SSO-locked or generic logins that ignore product UX</li>
-            <li>AI used off-platform with no prompt versioning or run history</li>
-            <li>Strong candidates lost after one posting closes</li>
-            <li>Reporting that cannot explain why someone was advanced</li>
-          </ul>
-        </div>
-        <div class="panel opportunity">
-          <h3><span class="dot good"></span> HireSphere</h3>
-          <ul>
-            <li>End-to-end loop in one product, one permission model</li>
-            <li>Custom branded login — HireSphere identity, not a bolted-on IdP</li>
-            <li>AI gateway + prompt registry + AIRun logging from day one</li>
-            <li>Resurfacing and priority lanes keep talent in motion</li>
-            <li>Dashboards and exports built for compliance and operators</li>
-          </ul>
-        </div>
-      </div>
+      <ul class="problem-list">
+        <li>
+          <strong>Scattered tools</strong>
+          <span>JDs in one app, resumes in another, scorecards in a spreadsheet. Nobody has the full picture when a hire is challenged.</span>
+        </li>
+        <li>
+          <strong>Ungoverned AI</strong>
+          <span>People paste resumes into ChatGPT. There’s no prompt version, no run log, and no way to replay why someone ranked high.</span>
+        </li>
+        <li>
+          <strong>Lost candidates</strong>
+          <span>A strong runner-up disappears when the role closes. Next quarter someone starts from scratch.</span>
+        </li>
+        <li>
+          <strong>Login politics</strong>
+          <span>v1 shouldn’t stall on enterprise SSO. HireSphere ships its own branded login; optional employee IDs stay a field, not a dependency.</span>
+        </li>
+      </ul>
     </div>
   </section>
 
   <section id="product" style="background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
     <div class="container">
-      <div class="section-label">Product architecture</div>
-      <h2 class="section-title">Ten domains. One coherent system.</h2>
-      <p class="section-lead">
-        Each domain is independently shippable, but designed as one architecture —
-        so investors see a platform, not a feature checklist.
+      <h2 class="section-title">What HireSphere covers</h2>
+      <p class="section-lead cap-intro">
+        Not a feature dump: the hiring loop, end to end. Each piece is shippable on its own, but they share one permission model and one AI gateway.
       </p>
-      <div class="domains">
-        <article class="domain">
-          <div class="domain-num">01 · Identity &amp; access</div>
-          <h3>Custom login you own</h3>
-          <p>Branded username/password experience, activation gates, JWT sessions, and admin RBAC — not Hubble SSO or a white-label IdP.</p>
-        </article>
-        <article class="domain">
-          <div class="domain-num">02 · AI platform governance</div>
-          <h3>Advisory AI, by construction</h3>
-          <p>Governed gateway, versioned prompts, logged runs, feedback loops. AI cannot shortlist, select, or hire on its own.</p>
-        </article>
-        <article class="domain">
-          <div class="domain-num">03 · Design system</div>
-          <h3>Enterprise UI that scales</h3>
-          <p>Tokens, authenticated shell, dense tables, and page templates so every feature ships consistent and fast.</p>
-        </article>
-        <article class="domain">
-          <div class="domain-num">04 · Hiring &amp; postings</div>
-          <h3>JD to open requisition</h3>
-          <p>AI-assisted JD drafts with human approval, finite and evergreen vacancies, governed closure rules.</p>
-        </article>
-        <article class="domain">
-          <div class="domain-num">05 · Candidate intake</div>
-          <h3>Secure evidence pipeline</h3>
-          <p>PDF upload, malware scan, parse/OCR, dedup, and versioned resumes attached to Applications.</p>
-        </article>
-        <article class="domain">
-          <div class="domain-num">06 · Matching &amp; ranking</div>
-          <h3>Retrieve, then judge</h3>
-          <p>Embeddings + Vector Search retrieval, then LLM ranking with full provenance — score, fitment, gaps, questions.</p>
-        </article>
-        <article class="domain">
-          <div class="domain-num">07 · Interview pipeline</div>
-          <h3>Human decisions with structure</h3>
-          <p>Mandatory shortlist reasons, scheduling, versioned notes, consolidated AI-drafted scorecards with approval.</p>
-        </article>
-        <article class="domain">
-          <div class="domain-num">08 · Decision &amp; offers</div>
-          <h3>Select, offer, close</h3>
-          <p>Priority picks (up to 5), offer lifecycle, onboarding checklist, optional external employee ID capture.</p>
-        </article>
-        <article class="domain">
-          <div class="domain-num">09 · Insight &amp; reporting</div>
-          <h3>Operate and prove</h3>
-          <p>Workload and pipeline dashboards, aging views, AI agreement metrics, audit search, redacted exports.</p>
-        </article>
-        <article class="domain">
-          <div class="domain-num">10 · Communications</div>
-          <h3>Keep talent in play</h3>
-          <p>Internal notifications, resurfacing MatchSuggestions, priority lane for selected-not-offered — candidate email gated.</p>
-        </article>
-      </div>
+      <ul class="cap-list">
+        <li>
+          <h3>Login &amp; access</h3>
+          <p>Branded username/password, activation, JWT sessions, and admin RBAC enforced on the API, not just hidden buttons in the UI.</p>
+        </li>
+        <li>
+          <h3>AI governance</h3>
+          <p>One gateway to Vertex. Versioned prompts. Every run written to the database before the model is called. AI can draft and score; it cannot shortlist, offer, or hire.</p>
+        </li>
+        <li>
+          <h3>Postings &amp; JDs</h3>
+          <p>AI helps draft job descriptions. A human approves. Finite and evergreen openings, with clear rules for when a role closes.</p>
+        </li>
+        <li>
+          <h3>Candidate intake</h3>
+          <p>PDF upload, malware scan, parse/OCR, dedup, and versioned resumes tied to applications.</p>
+        </li>
+        <li>
+          <h3>Matching &amp; ranking</h3>
+          <p>Embeddings retrieve candidates; an LLM ranks them with score, fit, gaps, and suggested questions, all tied back to the resume and JD versions used.</p>
+        </li>
+        <li>
+          <h3>Interviews &amp; scorecards</h3>
+          <p>Shortlist with a required reason, schedule rounds, keep versioned notes, consolidate AI-drafted scorecards that still need approval.</p>
+        </li>
+        <li>
+          <h3>Offers &amp; onboarding</h3>
+          <p>Priority picks (up to five), offer tracking, onboarding checklist, optional external employee ID when someone joins.</p>
+        </li>
+        <li>
+          <h3>Reporting &amp; resurfacing</h3>
+          <p>Workload and pipeline views, aging, AI agreement metrics, audit search. Strong near-misses stay visible for the next role.</p>
+        </li>
+      </ul>
     </div>
   </section>
 
   <section id="workflow">
     <div class="container">
-      <div class="section-label">Hiring loop</div>
-      <h2 class="section-title">Guarded stages from apply to hire</h2>
-      <p class="section-lead">Every stage transition is permissioned, reason-aware where required, and auditable.</p>
+      <h2 class="section-title">The path from apply to hire</h2>
+      <p class="section-lead">
+        Stage changes are permissioned. Where it matters (shortlist, select, reject), the system asks for a reason and keeps it.
+      </p>
       <div class="pipeline-wrap">
-        <div class="pipeline" role="list">
-          <div class="pipe-step" role="listitem"><div class="pipe-n">01</div><div class="pipe-name">JD &amp; Posting</div></div>
-          <div class="pipe-step" role="listitem"><div class="pipe-n">02</div><div class="pipe-name">Intake</div></div>
-          <div class="pipe-step" role="listitem"><div class="pipe-n">03</div><div class="pipe-name">Rank</div></div>
-          <div class="pipe-step" role="listitem"><div class="pipe-n">04</div><div class="pipe-name">Shortlist</div></div>
-          <div class="pipe-step" role="listitem"><div class="pipe-n">05</div><div class="pipe-name">Interview</div></div>
-          <div class="pipe-step" role="listitem"><div class="pipe-n">06</div><div class="pipe-name">Scorecard</div></div>
-          <div class="pipe-step" role="listitem"><div class="pipe-n">07</div><div class="pipe-name">Offer</div></div>
-          <div class="pipe-step" role="listitem"><div class="pipe-n">08</div><div class="pipe-name">Close</div></div>
-        </div>
+        <ol class="pipeline">
+          <li>JD &amp; posting</li>
+          <li>Intake</li>
+          <li>Rank</li>
+          <li>Shortlist</li>
+          <li>Interview</li>
+          <li>Scorecard</li>
+          <li>Offer</li>
+          <li>Close</li>
+        </ol>
       </div>
     </div>
   </section>
 
-  <section id="moat" style="background: var(--elevated); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
+  <section class="why" id="why">
     <div class="container">
-      <div class="section-label">Why HireSphere wins</div>
-      <h2 class="section-title">Defensibility investors can diligence</h2>
-      <p class="section-lead">Not “AI features.” Structural constraints that competitors cannot bolt on after the fact.</p>
-      <div class="moat-grid">
-        <div class="moat-card">
-          <div class="tag">Governance</div>
-          <h3>AI cannot hire</h3>
-          <p>Advisory-only is enforced in the gateway and workflow — no silent auto-reject or auto-offer path exists.</p>
+      <h2 class="section-title">Why this is hard to bolt on later</h2>
+      <p class="section-lead">
+        Anyone can wrap a chat box around an ATS. The durable pieces are the ones you have to design in from day one.
+      </p>
+      <div class="why-points">
+        <div>
+          <h3>AI never gets the final say</h3>
+          <p>There is no auto-reject or auto-offer path. The gateway and workflow refuse it. That’s a product constraint, not a policy slide.</p>
         </div>
-        <div class="moat-card">
-          <div class="tag">Provenance</div>
-          <h3>Every score is explainable</h3>
-          <p>RankingScore ties resume, JD, prompt, and model versions — so results remain reproducible when inputs change.</p>
+        <div>
+          <h3>Every score has a paper trail</h3>
+          <p>Rankings pin the resume version, JD version, prompt, and model. If inputs change, you can see why the number moved.</p>
         </div>
-        <div class="moat-card">
-          <div class="tag">Identity</div>
-          <h3>Product-owned login</h3>
-          <p>Custom HireSphere login UX and local RBAC — faster to brand, easier to control, independent of enterprise IdP politics for v1.</p>
+        <div>
+          <h3>We own the login</h3>
+          <p>Custom HireSphere sign-in and local RBAC for v1. Faster to brand, easier to ship, no waiting on corporate IdP politics.</p>
         </div>
       </div>
     </div>
@@ -510,47 +481,46 @@
 
   <section id="stack">
     <div class="container">
-      <div class="section-label">Platform</div>
-      <h2 class="section-title">Built for cloud scale on GCP</h2>
-      <p class="section-lead">Modern stack with a clear ops story: Cloud Run, private Cloud SQL, Vertex AI, Terraform, Cloud Build.</p>
+      <h2 class="section-title">How it’s built</h2>
+      <p class="section-lead">
+        GCP end to end. Boring choices on purpose, so ops and security reviews don’t turn into science projects.
+      </p>
       <table class="stack-table">
-        <thead>
-          <tr><th>Layer</th><th>Choice</th></tr>
-        </thead>
         <tbody>
-          <tr><td>Frontend</td><td>React 19, TypeScript, Vite, Tailwind v4 → GCS + Cloud CDN</td></tr>
-          <tr><td>API / Workers</td><td>Node.js Fastify + Cloud Run; Pub/Sub async jobs</td></tr>
-          <tr><td>Data</td><td>Cloud SQL PostgreSQL 15, Drizzle ORM, private IP</td></tr>
-          <tr><td>AI &amp; retrieval</td><td>Vertex AI Gemini + Vector Search; prompt registry</td></tr>
-          <tr><td>Auth</td><td><span class="mono">JWT + bcrypt</span> — custom <span class="mono">/login</span> (not Hubble SSO)</td></tr>
-          <tr><td>Delivery</td><td>Terraform IaC · Cloud Build CI/CD · secret management</td></tr>
+          <tr><th>Frontend</th><td>React 19, TypeScript, Vite, Tailwind v4, served from GCS + Cloud CDN</td></tr>
+          <tr><th>API &amp; jobs</th><td>Node.js Fastify on Cloud Run; Pub/Sub for async work</td></tr>
+          <tr><th>Data</th><td>Cloud SQL PostgreSQL 15, Drizzle ORM, private IP</td></tr>
+          <tr><th>AI</th><td>Vertex AI Gemini + Vector Search; prompts in a registry</td></tr>
+          <tr><th>Auth</th><td><span class="mono">JWT + bcrypt</span> on a custom <span class="mono">/login</span> (not enterprise SSO for v1)</td></tr>
+          <tr><th>Delivery</th><td>Terraform, Cloud Build, managed secrets</td></tr>
         </tbody>
       </table>
     </div>
   </section>
 
-  <section class="ask" id="invest">
-    <h2>Invest in the hiring layer enterprises will trust</h2>
-    <p>
-      HireSphere is the full recruitment operating system with AI that accelerates work
-      without owning the decision — architecture first, features that compound.
-    </p>
-    <div class="hero-actions" style="justify-content: center;">
-      <a class="btn btn-primary" href="mailto:hello@hiresphere.app?subject=HireSphere%20investment">Request a briefing</a>
-      <a class="btn btn-ghost" href="../docs/product-architecture.md">Read product architecture</a>
-    </div>
-    <div class="ask-meta">
-      <div><strong>10</strong> Product domains</div>
-      <div><strong>GCP-native</strong> Cloud Run · Vertex · SQL</div>
-      <div><strong>Advisory AI</strong> Human decides, always</div>
-      <div><strong>Owned identity</strong> Custom login, not SSO lock-in</div>
+  <section class="ask" id="contact">
+    <div class="ask-inner">
+      <h2>Want the deeper walkthrough?</h2>
+      <p>
+        Happy to walk the architecture, the AI constraints, and what’s shipping first.
+        This page is the short version.
+      </p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="mailto:hello@hiresphere.app?subject=HireSphere%20overview">Email us</a>
+        <a class="btn btn-ghost" href="../docs/product-architecture.md">Product architecture</a>
+      </div>
     </div>
   </section>
 
   <footer>
-    HireSphere · Confidential overview for investors and partners ·
-    <a href="../openspec/project.md">OpenSpec</a> ·
-    <a href="../docs/product-architecture.md">Architecture</a>
+    <div class="footer-inner">
+      <span>HireSphere · Confidential · for partners &amp; investors</span>
+      <span>
+        <a href="../openspec/project.md">OpenSpec</a>
+        ·
+        <a href="../docs/product-architecture.md">Architecture</a>
+      </span>
+    </div>
   </footer>
 </body>
 </html>
