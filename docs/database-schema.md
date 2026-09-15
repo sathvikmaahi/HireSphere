@@ -2,7 +2,22 @@
 
 PostgreSQL schema for **Cloud SQL**. ORM: Drizzle. Migrations live in `packages/db/migrations/`.
 
-See [implementation-plan.md](./implementation-plan.md) for feature mapping.
+See [implementation-plan.md](./implementation-plan.md) for feature mapping and
+[product-architecture.md](./product-architecture.md) for domain ownership.
+
+**Naming note:** Product language uses **Application** (candidate × posting). In v1 schema this
+is represented by `candidate_posting_links` (plus stage/history). A later migration may rename
+or introduce an `applications` view/table without breaking the domain model.
+
+### Domain additions (planned tables)
+
+| Table / concept | Domain | Notes |
+|---|---|---|
+| `prompt_registry`, `ai_runs`, `ai_run_outputs`, feedback | AI platform governance | Must exist before first Vertex call |
+| `vector_index_records` | Matching & ranking | Embedding metadata + traceback to relational IDs |
+| `match_suggestions` | Communications | Light resurfacing records; promote to Application on human action |
+| `notifications`, `notification_templates` | Communications | Internal recipients only in v1 |
+| Ranking provenance columns | Matching & ranking | resume_version, jd_version, prompt_version, model_version |
 
 ---
 

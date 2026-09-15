@@ -1,65 +1,111 @@
 # HireSphere — Feature Branch Reference
 
-Quick index of all implementation branches. **Step-by-step prompts:** [implementation-playbook.md](./implementation-playbook.md). Full detail in [implementation-plan.md](./implementation-plan.md).
+Quick index of implementation branches grouped by **product domain**.  
+**Architecture:** [product-architecture.md](./product-architecture.md) · **Prompts:** [implementation-playbook.md](./implementation-playbook.md) · **Detail:** [implementation-plan.md](./implementation-plan.md)
 
 ## Infrastructure (merge first)
 
 | Branch | Description |
 |---|---|
-| `infra/gcp-terraform` | **All GCP infra** — Terraform modules, environments (dev/staging/prod), Cloud Build, Dockerfiles |
-| `infra/monorepo-scaffold` | App monorepo, docker-compose local dev, platform adapters |
+| `infra/gcp-terraform` | GCP Terraform, Cloud Build, Dockerfiles |
+| `infra/monorepo-scaffold` | pnpm monorepo, docker-compose, platform adapters |
 | `infra/database-foundation` | Drizzle, migrations, seeds |
-| `infra/design-system-app-shell` | Design tokens, sidebar shell, page templates |
+| `infra/design-system-app-shell` | **Design system** — tokens, shell, page templates |
 
-See [gcp-infrastructure.md](./gcp-infrastructure.md) for Terraform layout and [../openspec/project.md](../openspec/project.md) for OpenSpec requirements.
+## Product domains → branches
 
-## Features (in recommended merge order)
+### Identity and access *(HireSphere login — not Hubble)*
 
 | # | Branch | Feature |
 |---|---|---|
-| 1 | `feat/auth-rest-login` | REST Login API (username & password) |
-| 2 | `feat/user-activation-access` | User activation and access enforcement |
-| 3 | `feat/admin-cockpit-rbac` | Admin cockpit: users, roles, permissions, page/action matrix |
-| 4 | `feat/job-description-workspace` | Job Description Workspace with AI drafting and human approval |
-| 5 | `feat/job-posting-management` | Job Posting Management (finite & unlimited vacancies) |
-| 6 | `feat/resume-upload-pipeline` | PDF resume upload: validation, malware scan, parse, OCR, storage |
-| 7 | `feat/candidate-database` | Candidate DB: dedup, resume versions, posting links, history |
-| 8 | `feat/ai-candidate-ranking` | AI ranking, fitment/gap summaries, interview questions |
-| 9 | `feat/candidate-resurfacing` | Existing-candidate resurfacing + selected-not-offered priority lane |
-| 10 | `feat/shortlisting-workflow` | Shortlisting with mandatory reason capture |
-| 11 | `feat/interview-scheduling` | Interview scheduling task workflow |
-| 12 | `feat/interview-console` | Interview console: notes, rounds, versioning, AI-readable storage |
-| 13 | `feat/scorecard-center` | Scorecard Center (interviewed candidates only) |
-| 14 | `feat/ai-assisted-scorecards` | AI-assisted scorecards with human review and approval |
-| 15 | `feat/priority-selection` | Priority selection (up to 5 per finite vacancy) |
-| 16 | `feat/offer-onboarding-tracker` | Offer & Onboarding Tracker with Hubble ID capture |
-| 17 | `feat/posting-closure-rules` | Closure rules for finite postings; manual evergreen controls |
-| 18 | `feat/dashboards-reports-audit` | Dashboards, reports, audit logs, AI run logs, exports |
-| 19 | `feat/responsible-ai-governance` | Responsible AI: prompt governance, model versioning, feedback |
+| 1 | `feat/auth-rest-login` | Custom branded login (username + password, JWT) |
+| 2 | `feat/user-activation-access` | Activation and access enforcement |
+| 3 | `feat/admin-cockpit-rbac` | Users, roles, permissions, page/action matrix |
 
-## Documentation
+### AI platform governance
 
-| Branch | Description |
-|---|---|
-| `feat/docs` | Planning docs, OpenSpec specs (`openspec/`), architecture |
+| # | Branch | Feature |
+|---|---|---|
+| 19a | `feat/responsible-ai-governance` | **Partial:** prompt registry + AIRun substrate (merge early) |
+| 19b | `feat/responsible-ai-governance` | **Full:** governance UI, feedback, eval harness |
+
+### Hiring and postings
+
+| # | Branch | Feature |
+|---|---|---|
+| 4 | `feat/job-description-workspace` | JD workspace, AI draft, human approval |
+| 5 | `feat/job-posting-management` | Finite & unlimited postings |
+| 17 | `feat/posting-closure-rules` | Closure rules + evergreen controls |
+
+### Candidate intake
+
+| # | Branch | Feature |
+|---|---|---|
+| 6 | `feat/resume-upload-pipeline` | PDF upload, scan, parse, OCR, storage |
+| 7 | `feat/candidate-database` | Dedup, versions, Applications, history |
+
+### Matching and ranking
+
+| # | Branch | Feature |
+|---|---|---|
+| 8 | `feat/ai-candidate-ranking` | Embeddings, vector retrieval, ranking board, fitment/gaps |
+
+### Interview pipeline
+
+| # | Branch | Feature |
+|---|---|---|
+| 10 | `feat/shortlisting-workflow` | Shortlisting with mandatory reason |
+| 11 | `feat/interview-scheduling` | Scheduling + internal notification |
+| 12 | `feat/interview-console` | Notes, rounds, versioning |
+| 13 | `feat/scorecard-center` | Scorecard center (interviewed only) |
+| 14 | `feat/ai-assisted-scorecards` | AI scorecards + human approval |
+
+### Decision and offers
+
+| # | Branch | Feature |
+|---|---|---|
+| 15 | `feat/priority-selection` | Up to 5 picks per finite vacancy |
+| 16 | `feat/offer-onboarding-tracker` | Offers, onboarding, optional `hubble_id` |
+
+### Insight and reporting
+
+| # | Branch | Feature |
+|---|---|---|
+| 18 | `feat/dashboards-reports-audit` | Dashboards, aging, audit, AI logs, exports |
+
+### Communications
+
+| # | Branch | Feature |
+|---|---|---|
+| 9 | `feat/candidate-resurfacing` | Resurfacing, MatchSuggestion, priority lane |
+| — | *(with 11, platform)* | Internal email / in-app notifications; calendar stub |
+
+## Recommended merge order
+
+1. Infra (`gcp-terraform` → `monorepo-scaffold` → `database-foundation` → `design-system-app-shell`)
+2. Identity & access (1 → 2 → 3)
+3. AI governance **partial** (19a)
+4. Hiring & postings (4 → 5)
+5. Candidate intake (6 → 7)
+6. Matching & ranking (8)
+7. Interview pipeline (10 → 14)
+8. Decision & offers (15 → 16 → 17)
+9. Insight (18) ∥ Communications / resurfacing (9)
+10. AI governance **full UI** (19b)
 
 ## Excluded from scope
 
-- `feat/hubble-sso-login` — **not in scope** (use REST auth instead)
-- Miracle branding assets or theming — **not in scope** (HireSphere branding only)
+- `feat/hubble-sso-login` — **not in scope** (HireSphere REST auth only)
+- Miracle branding — **not in scope**
+- Candidate-facing email — gated until product unlock
 
 ## Branch workflow
 
 ```bash
-# Example: start feature 1 after infra branches are merged to main
 git checkout main && git pull
 git checkout -b feat/auth-rest-login
-# ... implement ...
-# Open PR → feat/auth-rest-login → main
+# implement per docs/implementation-playbook.md
+# Open PR → main
 ```
 
-Naming rules:
-- All lowercase, hyphen-separated slugs
-- Prefix `infra/` for infrastructure branches
-- Prefix `feat/` for product feature branches
-- One feature per branch; no bundling unrelated work
+Naming: lowercase hyphen-separated; `infra/` or `feat/`; one feature per branch.
