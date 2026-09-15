@@ -277,6 +277,73 @@
       color: var(--accent-hover);
     }
 
+    .audience {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-bottom: 8px;
+    }
+    .audience h3 {
+      font-size: 15px;
+      font-weight: 650;
+      margin-bottom: 6px;
+    }
+    .audience p {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+
+    .arch-layers {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 28px;
+    }
+    .arch-layer {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 14px 18px;
+      display: grid;
+      grid-template-columns: 120px 1fr;
+      gap: 16px;
+      align-items: baseline;
+    }
+    .arch-layer strong {
+      font-size: 13px;
+      font-weight: 650;
+      color: var(--accent-hover);
+    }
+    .arch-layer span {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.45;
+    }
+    .arch-layer.base {
+      background: var(--navy);
+      border-color: transparent;
+    }
+    .arch-layer.base strong { color: var(--accent); }
+    .arch-layer.base span { color: rgba(255,255,255,0.7); }
+    .arch-note {
+      font-size: 15px;
+      color: var(--text-secondary);
+      max-width: 54ch;
+      margin-bottom: 20px;
+      line-height: 1.55;
+    }
+    .arch-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--accent-hover);
+      text-decoration: none;
+    }
+    .arch-link:hover { color: var(--accent); }
+
     .ask {
       background: var(--surface);
       border-top: 1px solid var(--border);
@@ -327,6 +394,8 @@
         gap: 6px;
       }
       section { padding: 56px 0; }
+      .audience { grid-template-columns: 1fr; gap: 18px; }
+      .arch-layer { grid-template-columns: 1fr; gap: 4px; }
     }
   </style>
 </head>
@@ -337,6 +406,7 @@
       <nav class="header-nav" aria-label="Primary">
         <a href="#problem">Problem</a>
         <a href="#product">Product</a>
+        <a href="#architecture">Architecture</a>
         <a href="#why">Why us</a>
         <a href="#stack">Stack</a>
         <a class="header-cta" href="#contact">Talk</a>
@@ -364,6 +434,29 @@
       <em>HireSphere puts the whole loop in one system,</em> and makes sure every AI suggestion is logged, versioned, and overridable.
     </p>
   </div>
+
+  <section id="audience" style="padding-bottom: 40px;">
+    <div class="container">
+      <h2 class="section-title">Who it’s for</h2>
+      <p class="section-lead">
+        One product, three jobs. Same data, same audit trail, different day-to-day screens.
+      </p>
+      <div class="audience">
+        <div>
+          <h3>Recruiters</h3>
+          <p>Run the pipeline: postings, intake, ranking board, shortlist, scheduling, offers.</p>
+        </div>
+        <div>
+          <h3>Hiring managers</h3>
+          <p>Review fit, interview with structure, approve scorecards, pick priority candidates.</p>
+        </div>
+        <div>
+          <h3>Admins</h3>
+          <p>Own users and roles, watch workload and aging, search the audit log when something is challenged.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <section id="problem">
     <div class="container">
@@ -456,6 +549,38 @@
     </div>
   </section>
 
+  <section id="architecture" style="background: var(--elevated); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
+    <div class="container">
+      <h2 class="section-title">How the product is layered</h2>
+      <p class="arch-note">
+        Control plane first (login + AI rules), then the hiring loop, then reporting and resurfacing on top of a shared API and workers.
+      </p>
+      <div class="arch-layers">
+        <div class="arch-layer">
+          <strong>Shell</strong>
+          <span>Design system and app shell every screen uses</span>
+        </div>
+        <div class="arch-layer">
+          <strong>Control</strong>
+          <span>Identity &amp; RBAC · AI gateway, prompts, and run logs</span>
+        </div>
+        <div class="arch-layer">
+          <strong>Hiring loop</strong>
+          <span>Postings → intake → ranking → interviews → offers</span>
+        </div>
+        <div class="arch-layer">
+          <strong>Operate</strong>
+          <span>Dashboards, aging, audit search · resurfacing &amp; internal notify</span>
+        </div>
+        <div class="arch-layer base">
+          <strong>Platform</strong>
+          <span>Cloud Run API · Cloud SQL · Pub/Sub workers · Vertex AI</span>
+        </div>
+      </div>
+      <a class="arch-link" href="product-architecture.html">Open the full product architecture →</a>
+    </div>
+  </section>
+
   <section class="why" id="why">
     <div class="container">
       <h2 class="section-title">Why this is hard to bolt on later</h2>
@@ -507,7 +632,7 @@
       </p>
       <div class="hero-actions">
         <a class="btn btn-primary" href="mailto:hello@hiresphere.app?subject=HireSphere%20overview">Email us</a>
-        <a class="btn btn-ghost" href="../docs/product-architecture.md">Product architecture</a>
+        <a class="btn btn-ghost" href="product-architecture.html">Product architecture</a>
       </div>
     </div>
   </section>
@@ -516,9 +641,7 @@
     <div class="footer-inner">
       <span>HireSphere · Confidential · for partners &amp; investors</span>
       <span>
-        <a href="../openspec/project.md">OpenSpec</a>
-        ·
-        <a href="../docs/product-architecture.md">Architecture</a>
+        <a href="product-architecture.html">Architecture</a>
       </span>
     </div>
   </footer>

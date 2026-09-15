@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="HireSphere product architecture: domains, stack, and how AI stays advisory." />
+  <title>HireSphere · Product architecture</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --accent: #00AAE7;
+      --accent-hover: #2368A0;
+      --bg: #F0F2F5;
+      --surface: #FFFFFF;
+      --border: #DDE0E6;
+      --text: #232527;
+      --text-secondary: #5C6570;
+      --text-muted: #8C8C8C;
+      --navy: #0F1729;
+      --radius: 10px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    ::selection { background: rgba(0, 170, 231, 0.25); color: var(--text); }
+    body {
+      font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+      font-size: 17px;
+      line-height: 1.6;
+      color: var(--text);
+      background: var(--bg);
+      -webkit-font-smoothing: antialiased;
+    }
+    a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+    .site-header {
+      position: sticky; top: 0; z-index: 50;
+      background: var(--navy);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .site-header-inner {
+      max-width: 920px; margin: 0 auto; padding: 0 28px;
+      height: 56px; display: flex; align-items: center; justify-content: space-between;
+    }
+    .wordmark {
+      text-decoration: none; color: #FAFAFA;
+      font-weight: 700; font-size: 17px; letter-spacing: -0.02em;
+    }
+    .wordmark span { color: var(--accent); }
+    .back {
+      color: rgba(255,255,255,0.7); text-decoration: none;
+      font-size: 13px; font-weight: 500;
+    }
+    .back:hover { color: #fff; }
+
+    .page-hero {
+      background: linear-gradient(160deg, var(--navy) 0%, #1a2744 100%);
+      color: #FAFAFA;
+      padding: 56px 28px 48px;
+    }
+    .page-hero-inner { max-width: 920px; margin: 0 auto; }
+    .page-hero h1 {
+      font-size: clamp(28px, 4vw, 40px);
+      font-weight: 750;
+      letter-spacing: -0.03em;
+      margin-bottom: 10px;
+    }
+    .page-hero p {
+      font-size: 17px;
+      color: rgba(255,255,255,0.62);
+      max-width: 52ch;
+    }
+
+    .container { max-width: 920px; margin: 0 auto; padding: 0 28px; }
+    section { padding: 56px 0; }
+    .section-title {
+      font-size: clamp(22px, 3vw, 30px);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      margin-bottom: 10px;
+    }
+    .section-lead {
+      font-size: 16px;
+      color: var(--text-secondary);
+      max-width: 56ch;
+      margin-bottom: 28px;
+    }
+
+    .rule {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 22px 24px;
+      margin-bottom: 8px;
+    }
+    .rule strong { display: block; font-size: 16px; margin-bottom: 6px; }
+    .rule p { font-size: 15px; color: var(--text-secondary); max-width: 60ch; }
+
+    .layers {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .layer {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 18px 20px;
+    }
+    .layer-label {
+      font-size: 12px;
+      font-weight: 650;
+      color: var(--accent-hover);
+      margin-bottom: 10px;
+      letter-spacing: 0.02em;
+    }
+    .layer-items {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 18px;
+      list-style: none;
+    }
+    .layer-items li {
+      font-size: 14px;
+      color: var(--text);
+    }
+    .layer-items li span {
+      display: block;
+      font-size: 13px;
+      color: var(--text-secondary);
+      margin-top: 2px;
+    }
+    .layer.platform {
+      background: var(--navy);
+      border-color: transparent;
+      color: #fff;
+    }
+    .layer.platform .layer-label { color: var(--accent); }
+    .layer.platform .layer-items li { color: #fff; }
+    .layer.platform .layer-items li span { color: rgba(255,255,255,0.6); }
+
+    .domain-list {
+      list-style: none;
+      border-top: 1px solid var(--border);
+    }
+    .domain-list li {
+      display: grid;
+      grid-template-columns: minmax(160px, 220px) 1fr;
+      gap: 12px 24px;
+      padding: 16px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .domain-list h3 { font-size: 15px; font-weight: 650; }
+    .domain-list p { font-size: 14px; color: var(--text-secondary); line-height: 1.5; }
+
+    .order {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+    }
+    .order li {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 8px 12px;
+      font-size: 13px;
+      font-weight: 600;
+    }
+    .order .sep {
+      border: none;
+      background: transparent;
+      padding: 0;
+      color: var(--text-muted);
+      font-weight: 400;
+    }
+
+    .stack-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+    .stack-table th, .stack-table td {
+      text-align: left;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+    .stack-table th {
+      font-weight: 600;
+      font-size: 12px;
+      color: var(--text-muted);
+      width: 28%;
+      padding-right: 16px;
+    }
+    .stack-table td { color: var(--text-secondary); }
+
+    footer {
+      background: #0a1020;
+      color: rgba(255,255,255,0.4);
+      padding: 24px 28px;
+      font-size: 13px;
+    }
+    .footer-inner {
+      max-width: 920px; margin: 0 auto;
+      display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap;
+    }
+    footer a { color: var(--accent); text-decoration: none; }
+
+    @media (max-width: 720px) {
+      .domain-list li { grid-template-columns: 1fr; gap: 4px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a class="wordmark" href="hiresphere-overview.html">Hire<span>Sphere</span></a>
+      <a class="back" href="hiresphere-overview.html">← Overview</a>
+    </div>
+  </header>
+
+  <div class="page-hero">
+    <div class="page-hero-inner">
+      <h1>Product architecture</h1>
+      <p>
+        How the product is sliced: who logs in, how AI is gated, and which domains
+        make up the hiring loop. Detail lives in OpenSpec; this is the map.
+      </p>
+    </div>
+  </div>
+
+  <section>
+    <div class="container">
+      <div class="rule">
+        <strong>AI recommends. A human decides.</strong>
+        <p>
+          That is enforced in the gateway and workflow, not left as a guideline.
+          No model call can shortlist, select, offer, hire, or close a role on its own.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding-top: 0;">
+    <div class="container">
+      <h2 class="section-title">Domain map</h2>
+      <p class="section-lead">
+        Layers sit on a shared API, database, and worker plane. UI consistency comes from the design system; hiring features share one permission model.
+      </p>
+      <div class="layers">
+        <div class="layer">
+          <div class="layer-label">Shell</div>
+          <ul class="layer-items">
+            <li>Design system<span>App shell, tokens, tables, forms</span></li>
+          </ul>
+        </div>
+        <div class="layer">
+          <div class="layer-label">Control plane</div>
+          <ul class="layer-items">
+            <li>Identity &amp; access<span>Login, sessions, RBAC</span></li>
+            <li>AI governance<span>Gateway, prompts, AIRun logs</span></li>
+          </ul>
+        </div>
+        <div class="layer">
+          <div class="layer-label">Hiring loop</div>
+          <ul class="layer-items">
+            <li>Postings &amp; JDs</li>
+            <li>Candidate intake</li>
+            <li>Matching &amp; ranking</li>
+            <li>Interview pipeline</li>
+            <li>Decision &amp; offers</li>
+          </ul>
+        </div>
+        <div class="layer">
+          <div class="layer-label">Operate</div>
+          <ul class="layer-items">
+            <li>Insight &amp; reporting</li>
+            <li>Communications &amp; resurfacing</li>
+          </ul>
+        </div>
+        <div class="layer platform">
+          <div class="layer-label">Platform</div>
+          <ul class="layer-items">
+            <li>API + DB + audit<span>Cloud Run · Cloud SQL</span></li>
+            <li>Async workers<span>Pub/Sub → Cloud Run</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
+    <div class="container">
+      <h2 class="section-title">What each domain owns</h2>
+      <p class="section-lead">Short version. Specs and branches live in the repo docs.</p>
+      <ul class="domain-list">
+        <li>
+          <h3>Identity &amp; access</h3>
+          <p>Branded login, activation, JWT sessions, admin RBAC. Not enterprise SSO for v1.</p>
+        </li>
+        <li>
+          <h3>AI platform governance</h3>
+          <p>Single Vertex egress, versioned prompts, run logging before invoke, advisory-only enforcement.</p>
+        </li>
+        <li>
+          <h3>Design system</h3>
+          <p>Tokens, authenticated shell, dense tables, page templates used by every feature.</p>
+        </li>
+        <li>
+          <h3>Hiring &amp; postings</h3>
+          <p>JD workspace with human approval, finite and evergreen openings, closure rules.</p>
+        </li>
+        <li>
+          <h3>Candidate intake</h3>
+          <p>PDF upload, scan, parse/OCR, dedup, versioned resumes on Applications.</p>
+        </li>
+        <li>
+          <h3>Matching &amp; ranking</h3>
+          <p>Embeddings, vector retrieval, LLM ranking with provenance (resume, JD, prompt, model).</p>
+        </li>
+        <li>
+          <h3>Interview pipeline</h3>
+          <p>Shortlist reasons, scheduling, versioned notes, AI-drafted scorecards needing approval.</p>
+        </li>
+        <li>
+          <h3>Decision &amp; offers</h3>
+          <p>Priority picks, offer lifecycle, onboarding checklist, optional external employee ID.</p>
+        </li>
+        <li>
+          <h3>Insight &amp; reporting</h3>
+          <p>Workload and pipeline views, aging, AI agreement metrics, redacted exports, audit search.</p>
+        </li>
+        <li>
+          <h3>Communications</h3>
+          <p>Internal notify, resurfacing suggestions, priority lane. Candidate email stays gated.</p>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <h2 class="section-title">Build order</h2>
+      <p class="section-lead">
+        AI governance lands before the first real Vertex call (JD draft or ranking).
+        Reporting and resurfacing can trail the core loop.
+      </p>
+      <ol class="order">
+        <li>Infra</li>
+        <li class="sep">→</li>
+        <li>Design system</li>
+        <li class="sep">→</li>
+        <li>Identity</li>
+        <li class="sep">→</li>
+        <li>AI governance</li>
+        <li class="sep">→</li>
+        <li>Postings</li>
+        <li class="sep">→</li>
+        <li>Intake</li>
+        <li class="sep">→</li>
+        <li>Ranking</li>
+        <li class="sep">→</li>
+        <li>Interviews</li>
+        <li class="sep">→</li>
+        <li>Offers</li>
+        <li class="sep">→</li>
+        <li>Reporting ∥ Comms</li>
+      </ol>
+    </div>
+  </section>
+
+  <section style="background: var(--surface); border-top: 1px solid var(--border);">
+    <div class="container">
+      <h2 class="section-title">Platform stack</h2>
+      <p class="section-lead">Locked choices. Business logic stays in API and workers, not in the React app.</p>
+      <table class="stack-table">
+        <tbody>
+          <tr><th>Presentation</th><td>React 19, Vite, Tailwind v4 → GCS + Cloud CDN</td></tr>
+          <tr><th>API</th><td>Node.js Fastify on Cloud Run · REST <code>/api/v1</code></td></tr>
+          <tr><th>Workers</th><td>Cloud Run + Pub/Sub (resume, embeddings, ranking, exports)</td></tr>
+          <tr><th>Data</th><td>Cloud SQL PostgreSQL 15 · Drizzle · private IP</td></tr>
+          <tr><th>AI</th><td>Vertex AI Gemini + Vector Search · prompt registry</td></tr>
+          <tr><th>Auth</th><td>JWT + bcrypt · custom /login</td></tr>
+          <tr><th>Delivery</th><td>Terraform · Cloud Build · managed secrets</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-inner">
+      <span>HireSphere · Product architecture · confidential</span>
+      <span><a href="hiresphere-overview.html">Back to overview</a></span>
+    </div>
+  </footer>
+</body>
+</html>
